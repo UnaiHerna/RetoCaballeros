@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-03-2024 a las 10:05:18
+-- Tiempo de generación: 14-03-2024 a las 10:37:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -56,7 +56,9 @@ INSERT INTO `armas` (`id`, `nombre`, `daño`, `peso`) VALUES
 CREATE TABLE `caballero` (
   `id` int(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
-  `nivel` int(3) NOT NULL,
+  `exp` varchar(3) NOT NULL,
+  `fuerza` int(11) NOT NULL,
+  `destreza` int(11) NOT NULL,
   `id_arma` int(255) NOT NULL,
   `id_escudo` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -65,14 +67,14 @@ CREATE TABLE `caballero` (
 -- Volcado de datos para la tabla `caballero`
 --
 
-INSERT INTO `caballero` (`id`, `nombre`, `nivel`, `id_arma`, `id_escudo`) VALUES
-(1, 'Siegmeyer de Catarina', 10, 2, 1),
-(2, 'Solaire de Astora', 8, 3, 5),
-(3, 'Havel la Roca', 15, 7, 3),
-(4, 'Príncipe Ricard', 5, 1, 4),
-(5, 'Yuria de Londor', 3, 6, 6),
-(6, 'El Irrompible Parches', 6, 6, 2),
-(7, 'Radahn el Azote de las Estrellas', 20, 7, 3);
+INSERT INTO `caballero` (`id`, `nombre`, `exp`, `fuerza`, `destreza`, `id_arma`, `id_escudo`) VALUES
+(1, 'Siegmeyer de Catarina', '10', 20, 12, 2, 1),
+(2, 'Solaire de Astora', '8', 13, 15, 3, 5),
+(3, 'Havel la Roca', '15', 50, 2, 7, 3),
+(4, 'Príncipe Ricard', '5', 2, 35, 1, 4),
+(5, 'Yuria de Londor', '3', 10, 12, 6, 6),
+(6, 'El Irrompible Parches', '6', 13, 13, 6, 2),
+(7, 'Radahn el Azote de las Estrellas', '20', 45, 23, 7, 3);
 
 -- --------------------------------------------------------
 
@@ -93,7 +95,7 @@ CREATE TABLE `caballos` (
 --
 
 INSERT INTO `caballos` (`id`, `nombre`, `vMax`, `resistencia`, `id_caballero`) VALUES
-(1, 'Caballo Estrellado', 1.5, 1, 7),
+(1, 'Leonard', 1.5, 1, 7),
 (2, 'Vicente', 5, 10, 1),
 (3, 'Perdigón', 10, 5, 4),
 (4, 'Pegaso', 15.5, 12.2, 2),
