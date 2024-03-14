@@ -10,6 +10,17 @@ import vista.Visor;
 public class ControladorApp {
 	
 	public final static int SALIR = 0;
+	
+	public final static int CABALLEROS = 1;
+	public final static int ARMAS = 2;
+	public final static int ESCUDOS = 3;
+	public final static int LUCHAS = 4;
+	
+	public final static int VER_CABALLEROS = 7;
+	public final static int INSERTAR_CABALLEROS = 8;
+	public final static int ELIMINAR_CABALLEROS = 9;
+	public final static int MODIFICAR_CABALLEROS = 10;
+	
 	public final static int VER_ESCUDOS = 1;
 	public final static int INSERTAR_ESCUDOS = 2;
 	public final static int ELIMINAR_ESCUDOS = 3;
@@ -39,7 +50,39 @@ public class ControladorApp {
 				System.out.println("Saliendo del programa");
 				salir = true;
 				break;
+				
+			case VER_CABALLEROS:
+				
+				ArrayList<Caballero> caballeros = gestorBBDD.getCaballeros();
+				Visor.visualizarCaballeros(caballeros);
+				break;
+				
+			case INSERTAR_CABALLEROS:
+				
+				Caballero caballero = Formulario.introducirDatosCaballero();
+				gestorBBDD.insertarCaballero(caballero);
+				break;
+				
+			case ELIMINAR_CABALLEROS:
+				
+				caballeros = gestorBBDD.getCaballeros();
+				Visor.visualizarCaballeros(caballeros);
+				
+				int idCaballero = Formulario.introducirIdCaballero();
+				gestorBBDD.eliminarCaballero(idCaballero);
+				break;
 			
+			case MODIFICAR_CABALLEROS:
+				
+				caballeros = gestorBBDD.getCaballeros();
+				Visor.visualizarCaballeros(caballeros);
+				
+				idCaballero = Formulario.introducirIdCaballero();
+				caballero = Formulario.introducirDatosCaballero();
+				gestorBBDD.modificarCaballero(caballero, idCaballero);
+				
+				break;
+				
 			case VER_ARMAS:
 				
 				ArrayList<Arma> armas = gestorBBDD.getArmas();
@@ -149,6 +192,25 @@ public class ControladorApp {
 		}while(!salir);
 	}
   
+	public static void menuPrincipal() {
+		
+		System.out.println("--MENU--");
+		System.out.println(SALIR + "- Salir del programa");
+		System.out.println(CABALLEROS + "- Entrar al menu de caballeros");
+		System.out.println(ARMAS + "- Entrar al menu de armas");
+		System.out.println(ESCUDOS + "- Entrar al menu de escudos");
+		System.out.println(LUCHAS + "- Entrar al menu de lucha");
+	}
+	
+	public static void menuCaballeros() {
+		System.out.println("--MENU--");
+		System.out.println(SALIR + "- Salir del programa");
+		System.out.println(VER_CABALLEROS + "- Visualizar todos los caballeros");
+		System.out.println(INSERTAR_CABALLEROS + "- Crear caballeros nuevos");
+		System.out.println(ELIMINAR_CABALLEROS + "- Elimina caballeros");
+		System.out.println(MODIFICAR_CABALLEROS + "- Modifica los caballeros ya creados");
+	}
+	
 	public static void menuEscudos(){
 		
 		System.out.println("--MENU--");
@@ -168,4 +230,14 @@ public class ControladorApp {
 		System.out.println(ELIMINAR_ARMA + "- Elimina armas");
 		System.out.println(MODIFICAR_ARMA + "- Modifica las armas ya creadas");
 	}
+	
+	public static void menuLucha() {
+		System.out.println("--MENU--");
+		System.out.println("- Salir del programa");
+		System.out.println("- Visualizar todas las armas");
+		System.out.println("- Crear armas nuevas");
+		System.out.println("- Elimina armas");
+		System.out.println("- Modifica las armas ya creadas");
+	}
+
 }

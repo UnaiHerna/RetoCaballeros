@@ -6,6 +6,44 @@ public class Formulario {
 
 	public static Scanner scan = new Scanner(System.in);
 	
+	public static Caballero introducirDatosCaballero() {
+		
+		GestorBBDD gestorBBDD = new GestorBBDD();
+		Caballero caballero = new Caballero();
+		
+		System.out.println("Introduce el nombre del caballero");
+		caballero.setNombre(scan.nextLine());
+		
+		System.out.println("Introduce la experiencia del caballero");
+		caballero.setExp(Integer.parseInt(scan.nextLine()));
+		
+		System.out.println("Introduce la fuerza que tiene el caballero");
+		caballero.setFuerza(Integer.parseInt(scan.nextLine()));
+		
+		System.out.println("Introduce la destreza que tiene el caballero");
+		caballero.setDestreza(Integer.parseInt(scan.nextLine()));
+		
+		System.out.println("Introduce el arma que tiene equipada el caballero");
+		caballero.setArma(gestorBBDD.getArma(Formulario.introducirIdArma()));
+		
+		System.out.println("Introduce el escudo que tiene equipada el caballero");
+		caballero.setEscudo(gestorBBDD.getEscudo(Formulario.introducirIdEscudo()));
+		
+		return caballero;
+		
+	}
+	
+	public static int introducirIdCaballero() {
+		
+		int idCaballero;
+		
+		System.out.println("Introduce el id del caballero");
+		idCaballero = Integer.parseInt(scan.nextLine());
+		
+		return idCaballero;
+		
+	}
+	
 	public static Escudo introducirDatosEscudo() {
 		
 		Escudo escudo = new Escudo();
