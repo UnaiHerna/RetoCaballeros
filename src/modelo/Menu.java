@@ -1,0 +1,75 @@
+package modelo;
+
+public class Menu {
+	
+	public final static int SALIR = 0;
+	
+	public final static int CABALLEROS = 1;
+	public final static int ARMAS = 2;
+	public final static int ESCUDOS = 3;
+	public final static int LUCHAS = 4;
+	
+	public final static int VER_CABALLEROS = 7;
+	public final static int INSERTAR_CABALLEROS = 8;
+	public final static int ELIMINAR_CABALLEROS = 9;
+	public final static int MODIFICAR_CABALLEROS = 10;
+	
+	public final static int VER_ESCUDOS = 1;
+	public final static int INSERTAR_ESCUDOS = 2;
+	public final static int ELIMINAR_ESCUDOS = 3;
+	public final static int MODIFICAR_ESCUDOS = 4;
+	
+	public final static int VER_ARMAS = 1;
+	public final static int INSERTAR_ARMAS = 2;
+	public final static int ELIMINAR_ARMA = 3;
+	public final static int MODIFICAR_ARMA = 4;
+	public final static int PRUEBA_PELEA = 5;
+	
+	public static void menuPrincipal() {
+		
+		System.out.println("--MENU--");
+		System.out.println(SALIR + "- Salir del programa");
+		System.out.println(CABALLEROS + "- Entrar al menu de caballeros");
+		System.out.println(ARMAS + "- Entrar al menu de armas");
+		System.out.println(ESCUDOS + "- Entrar al menu de escudos");
+		System.out.println(LUCHAS + "- Entrar al menu de lucha");
+	}
+	
+	public static void menuCaballeros() {
+		System.out.println("--MENU--");
+		System.out.println(SALIR + "- Salir");
+		System.out.println(VER_CABALLEROS + "- Visualizar todos los caballeros");
+		System.out.println(INSERTAR_CABALLEROS + "- Crear caballeros nuevos");
+		System.out.println(ELIMINAR_CABALLEROS + "- Elimina caballeros");
+		System.out.println(MODIFICAR_CABALLEROS + "- Modifica los caballeros ya creados");
+	}
+	
+	public static void menuEscudos(){
+		
+		System.out.println("--MENU--");
+		System.out.println(SALIR + "- Salir");
+		System.out.println(VER_ESCUDOS + "- Visualizar todos los escudos");
+		System.out.println(INSERTAR_ESCUDOS + "- Crear escudos nuevos");
+		System.out.println(ELIMINAR_ESCUDOS + "- Elimina escudos");
+		System.out.println(MODIFICAR_ESCUDOS + "- Modifica los escudos ya creados");
+	}
+  
+	public static void menuArmas(){
+		
+		System.out.println("--MENU--");
+		System.out.println(SALIR + "- Salir");
+		System.out.println(VER_ARMAS + "- Visualizar todas las armas");
+		System.out.println(INSERTAR_ARMAS + "- Crear armas nuevas");
+		System.out.println(ELIMINAR_ARMA + "- Elimina armas");
+		System.out.println(MODIFICAR_ARMA + "- Modifica las armas ya creadas");
+	}
+	
+	public static void menuLucha() {
+		System.out.println("--MENU--");
+		System.out.println("- Salir");
+		System.out.println("- Visualizar todas las armas");
+		System.out.println("- Crear armas nuevas");
+		System.out.println("- Elimina armas");
+		System.out.println("- Modifica las armas ya creadas");
+	}
+}
