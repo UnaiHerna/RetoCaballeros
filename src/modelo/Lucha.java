@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.Date;
+import java.util.Random;
 
 public class Lucha {
 	private int id;
@@ -56,9 +57,41 @@ public class Lucha {
 	}
 	
 	public Caballero lucha(Caballero caballero1, Caballero caballero2) {
-		int fuerzaDeLuchaCab1;
+		Random randomizador = new Random();
+		double numAleatorio = randomizador.nextDouble(1)/10;
+		double numAleatorio2 = randomizador.nextDouble(1)/10;
+		//System.out.println(numAleatorio);
+		//System.out.println(numAleatorio2);
 		
-		return caballero1;
+		//Ataque y defensa Cab1
+		double ataqueCab1 = (caballero1.getFuerza()+caballero1.getDestreza()*2+caballero1.getArma().getDaño())-
+				caballero1.getArma().getPeso()+caballero1.getEscudo().getPeso();
+		//System.out.println(ataqueCab1);
+		
+		double defensaCab1 = (caballero1.getFuerza()+caballero1.getEscudo().getDefensa());
+		//System.out.println(defensaCab1);
+		
+		//Ataque y defensa Cab2
+		double ataqueCab2 = (caballero2.getFuerza()+caballero2.getDestreza()*2+caballero2.getArma().getDaño())-
+				caballero2.getArma().getPeso()+caballero2.getEscudo().getPeso();
+		//System.out.println(ataqueCab2);
+		
+		double defensaCab2 = (caballero2.getFuerza()+caballero2.getEscudo().getDefensa());
+		//System.out.println(defensaCab2);
+		
+		//Fuerza de lucha de los caballeros
+		double fuerzaDeLuchaCab1 = (ataqueCab1-defensaCab2)*(numAleatorio*caballero1.getExp());
+		//System.out.println("Fuerza lucha: "+fuerzaDeLuchaCab1);
+		
+		double fuerzaDeLuchaCab2 = (ataqueCab2-defensaCab1)*(numAleatorio2*caballero2.getExp());
+		//System.out.println("Fuerza lucha: "+fuerzaDeLuchaCab2);
+		
+		//Decide el ganador de la lucha
+		if(fuerzaDeLuchaCab1>=fuerzaDeLuchaCab2) {
+			return caballero1;
+		}else {
+			return caballero2;
+		}
 		
 	}
 	

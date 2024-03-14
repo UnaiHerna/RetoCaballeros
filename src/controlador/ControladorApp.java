@@ -1,6 +1,7 @@
 package controlador;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import modelo.*;
@@ -15,8 +16,8 @@ public static Scanner scan=new Scanner(System.in);
 	public final static int INSERTAR_ARMAS = 2;
 	public final static int ELIMINAR_ARMA = 3;
 	public final static int MODIFICAR_ARMA = 4;
-	
-	
+	public final static int PRUEBA_PELEA = 5;
+
 	public static void run() {
 		GestorBBDD gestorBBDD = new GestorBBDD();
 		boolean salir=false;
@@ -71,6 +72,21 @@ public static Scanner scan=new Scanner(System.in);
 				System.out.println("Se ha modificado con exito");
 				break;
 			
+			case PRUEBA_PELEA:
+				Lucha lucha = new Lucha();
+				Arma armaPrueba = new Arma(1, "pepo", 12, 12);
+				Escudo escudoPrueba = new Escudo(1, "pepo", 12, 12);
+				Caballero caballero1 = new Caballero(1, "Pedro", 3, 12, 13, armaPrueba, escudoPrueba);
+				Caballero caballero2 = new Caballero(2, "Anakin", 5, 10, 9, armaPrueba, escudoPrueba);
+				
+				lucha.setId(1);
+				lucha.setFecha(new Date());
+				lucha.setCaballero1(caballero1);
+				lucha.setCaballero2(caballero2);
+				
+				Caballero ganador = lucha.lucha(lucha.getCaballero1(), lucha.getCaballero2());
+				System.out.println(ganador);
+				break;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + opcion);
 			}
