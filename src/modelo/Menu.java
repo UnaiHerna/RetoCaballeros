@@ -9,10 +9,10 @@ public class Menu {
 	public final static int ESCUDOS = 3;
 	public final static int LUCHAS = 4;
 	
-	public final static int VER_CABALLEROS = 7;
-	public final static int INSERTAR_CABALLEROS = 8;
-	public final static int ELIMINAR_CABALLEROS = 9;
-	public final static int MODIFICAR_CABALLEROS = 10;
+	public final static int VER_CABALLEROS = 1;
+	public final static int INSERTAR_CABALLEROS = 2;
+	public final static int ELIMINAR_CABALLEROS = 3;
+	public final static int MODIFICAR_CABALLEROS = 4;
 	
 	public final static int VER_ESCUDOS = 1;
 	public final static int INSERTAR_ESCUDOS = 2;
@@ -25,9 +25,14 @@ public class Menu {
 	public final static int MODIFICAR_ARMA = 4;
 	public final static int PRUEBA_PELEA = 5;
 	
+	public final static int VER_LUCHA = 1;
+	public final static int INSERTAR_LUCHA = 2;
+	public final static int ELIMINAR_LUCHA = 3;
+	public final static int MODIFICAR_LUCHA = 4;
+	
 	public static void menuPrincipal() {
 		
-		System.out.println("--MENU--");
+		System.out.println("\n--MENU--");
 		System.out.println(SALIR + "- Salir del programa");
 		System.out.println(CABALLEROS + "- Entrar al menu de caballeros");
 		System.out.println(ARMAS + "- Entrar al menu de armas");
@@ -36,7 +41,7 @@ public class Menu {
 	}
 	
 	public static void menuCaballeros() {
-		System.out.println("--MENU--");
+		System.out.println("\n--MENU--");
 		System.out.println(SALIR + "- Salir");
 		System.out.println(VER_CABALLEROS + "- Visualizar todos los caballeros");
 		System.out.println(INSERTAR_CABALLEROS + "- Crear caballeros nuevos");
@@ -46,7 +51,7 @@ public class Menu {
 	
 	public static void menuEscudos(){
 		
-		System.out.println("--MENU--");
+		System.out.println("\n--MENU--");
 		System.out.println(SALIR + "- Salir");
 		System.out.println(VER_ESCUDOS + "- Visualizar todos los escudos");
 		System.out.println(INSERTAR_ESCUDOS + "- Crear escudos nuevos");
@@ -56,7 +61,7 @@ public class Menu {
   
 	public static void menuArmas(){
 		
-		System.out.println("--MENU--");
+		System.out.println("\n--MENU--");
 		System.out.println(SALIR + "- Salir");
 		System.out.println(VER_ARMAS + "- Visualizar todas las armas");
 		System.out.println(INSERTAR_ARMAS + "- Crear armas nuevas");
@@ -65,7 +70,7 @@ public class Menu {
 	}
 	
 	public static void menuLucha() {
-		System.out.println("--MENU--");
+		System.out.println("\n--MENU--");
 		System.out.println("- Salir");
 		System.out.println("- Visualizar todas las armas");
 		System.out.println("- Crear armas nuevas");

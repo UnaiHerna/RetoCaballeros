@@ -2,6 +2,8 @@ package modelo;
 
 import java.util.Scanner;
 
+import vista.Visor;
+
 public class Formulario {
 
 	public static Scanner scan = new Scanner(System.in);
@@ -23,10 +25,12 @@ public class Formulario {
 		System.out.println("Introduce la destreza que tiene el caballero");
 		caballero.setDestreza(Integer.parseInt(scan.nextLine()));
 		
-		System.out.println("Introduce el arma que tiene equipada el caballero");
+		//Arma
+		Visor.visualizarArmas(gestorBBDD.getArmas());
 		caballero.setArma(gestorBBDD.getArma(Formulario.introducirIdArma()));
 		
-		System.out.println("Introduce el escudo que tiene equipada el caballero");
+		//Escudo
+		Visor.visualizarEscudos(gestorBBDD.getEscudos());
 		caballero.setEscudo(gestorBBDD.getEscudo(Formulario.introducirIdEscudo()));
 		
 		return caballero;

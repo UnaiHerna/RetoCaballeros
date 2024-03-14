@@ -3,12 +3,8 @@ package controlador;
 import java.util.Date;
 import java.util.Scanner;
 
-import modelo.Arma;
-import modelo.Caballero;
-import modelo.Escudo;
-import modelo.GestorBBDD;
-import modelo.Lucha;
-import modelo.Menu;
+import modelo.*;
+import vista.Visor;
 
 public class ControladorLuchas {
 	
@@ -33,19 +29,15 @@ public class ControladorLuchas {
 					break;
 				
 				case Menu.PRUEBA_PELEA:
-					Lucha lucha = new Lucha();
-					Arma armaPrueba = new Arma(1, "pepo", 12, 12);
-					Escudo escudoPrueba = new Escudo(1, "pepo", 12, 12);
-					Caballero caballero1 = new Caballero(1, "Pedro", 3, 12, 13, armaPrueba, escudoPrueba);
-					Caballero caballero2 = new Caballero(2, "Anakin", 5, 10, 9, armaPrueba, escudoPrueba);
+					Visor.visualizarCaballeros(gestorBBDD.getCaballeros());
+					System.out.println("Escribe el id del primer participante de la pelea");
+					Caballero caballero1 = gestorBBDD.getCaballero(Integer.parseInt(scan.nextLine()));
 					
-					lucha.setId(1);
-					lucha.setFecha(new Date());
-					lucha.setCaballero1(caballero1);
-					lucha.setCaballero2(caballero2);
+					System.out.println("Escribe el id del segundo participante de la pelea");	
+					Caballero caballero2 = gestorBBDD.getCaballero(Integer.parseInt(scan.nextLine()));
 					
-					Caballero ganador = lucha.lucha(lucha.getCaballero1(), lucha.getCaballero2());
-					System.out.println(ganador);
+					Lucha lucha = new Lucha(new Date(), caballero1, caballero2);
+					lucha.lucha(caballero1, caballero2);
 					break;
 					
 				default:

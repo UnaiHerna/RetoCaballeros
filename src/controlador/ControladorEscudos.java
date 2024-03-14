@@ -34,7 +34,8 @@ public class ControladorEscudos {
 				case Menu.VER_ESCUDOS:
 					
 					ArrayList<Escudo> escudos = gestorBBDD.getEscudos();
-					Visor.verEscudos(escudos);
+					Visor.visualizarEscudos(escudos);
+					break;
 
 				case Menu.INSERTAR_ESCUDOS:
 					
@@ -47,7 +48,7 @@ public class ControladorEscudos {
 				case Menu.ELIMINAR_ESCUDOS:
 					
 					escudos = gestorBBDD.getEscudos();
-					Visor.verEscudos(escudos);
+					Visor.visualizarEscudos(escudos);
 					
 					int idEscudo = Formulario.introducirIdEscudo();
 					gestorBBDD.eliminarEscudo(idEscudo);
@@ -58,7 +59,7 @@ public class ControladorEscudos {
 				case Menu.MODIFICAR_ESCUDOS:
 					
 					escudos = gestorBBDD.getEscudos();
-					Visor.verEscudos(escudos);
+					Visor.visualizarEscudos(escudos);
 					
 					idEscudo = Formulario.introducirIdEscudo();
 					escudo = Formulario.introducirDatosEscudo();

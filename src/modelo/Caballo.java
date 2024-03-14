@@ -59,8 +59,8 @@ public class Caballo {
 
 	@Override
 	public String toString() {
-		return "Caballo [id=" + id + ", nombre=" + nombre + ", vMax=" + vMax + ", resistencia=" + resistencia
-				+ ", caballero=" + caballero + "]";
+		return id + "."+ nombre + ", Velocidad Maxima= " + vMax + ", Resistencia= " + resistencia
+				+ ", Caballero: " + caballero.getNombre();
 	}
 	
 }

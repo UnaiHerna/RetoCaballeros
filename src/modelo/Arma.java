@@ -50,7 +50,7 @@ public class Arma {
 
 	@Override
 	public String toString() {
-		return "Arma [id=" + id + ", nombre=" + nombre + ", daño=" + daño + ", peso=" + peso + "]";
+		return id + "."+ nombre + ", Daño= " + daño + ", Peso= " + peso;
 	}
 
 }

@@ -49,7 +49,7 @@ public class Escudo {
 
 	@Override
 	public String toString() {
-		return "Escudo [id=" + id + ", nombre=" + nombre + ", defensa=" + defensa + ", peso=" + peso + "]";
+		return id + "."+ nombre + ", Defensa= " + defensa + ", Peso= " + peso;
 	}
 }
 

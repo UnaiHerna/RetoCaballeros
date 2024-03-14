@@ -59,8 +59,8 @@ public class Escudero {
 
 	@Override
 	public String toString() {
-		return "Escudero [id=" + id + ", nombre=" + nombre + ", exp=" + exp + ", fortaleza=" + fortaleza
-				+ ", caballero=" + caballero + "]";
+		return id + "."+ nombre + ", Experiencia= " + exp + ", Fortaleza= " + fortaleza
+				+ ", Caballero: " + caballero.getNombre();
 	}
 	
 }

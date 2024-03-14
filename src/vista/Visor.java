@@ -8,17 +8,16 @@ import modelo.Caballero;
 
 public class Visor {
 	
-	public static void verEscudos(ArrayList<Escudo> escudos) {
-		
+	public static void visualizarEscudos(ArrayList<Escudo> escudos) {
 		for (Escudo escudo : escudos) {
 			System.out.println(escudo);
 		}
 	}
   
   public static void visualizarArmas(ArrayList<Arma> armas) {
-			for (Arma arma : armas) {
-				System.out.println(arma);
-			}
+		for (Arma arma : armas) {
+			System.out.println(arma);
+		}
 	}
 	
   public static void visualizarCaballeros(ArrayList<Caballero> caballeros) {

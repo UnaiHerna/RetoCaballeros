@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import controlador.Conector;
-import vista.Visor;
 
 public class GestorBBDD extends Conector{
 	
@@ -37,7 +36,6 @@ public class GestorBBDD extends Conector{
 			return caballeros;
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -55,6 +53,7 @@ public class GestorBBDD extends Conector{
 			
 			Statement st = cn.createStatement();
 			ResultSet rs = st.executeQuery(sql);
+			
 			while(rs.next()) {
 				Escudo escudo = new Escudo();
 				escudo.setId(rs.getInt("id"));
@@ -92,7 +91,6 @@ public class GestorBBDD extends Conector{
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -124,7 +122,6 @@ public class GestorBBDD extends Conector{
 			return armas;
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -153,10 +150,38 @@ public class GestorBBDD extends Conector{
 			}	
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		return null;
+		
+	}
+	
+	public Caballero getCaballero(int idCaballero) {
+		
+		String sql ="SELECT * FROM caballeros WHERE id=?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, idCaballero);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				Caballero caballero = new Caballero();
+				caballero.setId(rs.getInt("id"));
+				caballero.setNombre(rs.getString("nombre"));
+				caballero.setExp(rs.getInt("exp"));
+				caballero.setFuerza(rs.getInt("fuerza"));
+				caballero.setDestreza(rs.getInt("fuerza"));
+				caballero.setArma(getArma(rs.getInt("id_arma")));
+				caballero.setEscudo(getEscudo(rs.getInt("id_escudo")));
+				return caballero;
+			}	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return null;
 		
@@ -178,7 +203,6 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -229,7 +253,6 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -259,7 +282,6 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -282,7 +304,6 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -11,8 +11,7 @@ public class Lucha {
 	
 	public Lucha() {}
 
-	public Lucha(int id, Date fecha, Caballero caballero1, Caballero caballero2) {
-		this.id = id;
+	public Lucha(Date fecha, Caballero caballero1, Caballero caballero2) {
 		this.fecha = fecha;
 		this.caballero1 = caballero1;
 		this.caballero2 = caballero2;
@@ -52,8 +51,7 @@ public class Lucha {
 
 	@Override
 	public String toString() {
-		return "Lucha [id=" + id + ", fecha=" + fecha + ", caballero1=" + caballero1 + ", caballero2=" + caballero2
-				+ "]";
+		return id + "." + ", Fecha: " + fecha + ", 1.Caballero: " + caballero1.getNombre() + ", 2.Caballero: " + caballero2.getNombre();
 	}
 	
 	public Caballero lucha(Caballero caballero1, Caballero caballero2) {
