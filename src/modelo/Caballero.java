@@ -6,19 +6,15 @@ public class Caballero {
 	private int nivel;
 	private Arma arma;
 	private Escudo escudo;
-	private Caballo caballo;
-	private Escudero escudero;
 	
 	public Caballero() {}
 
-	public Caballero(int id, String nombre, int nivel, Arma arma, Escudo escudo, Caballo caballo, Escudero escudero) {
+	public Caballero(int id, String nombre, int nivel, Arma arma, Escudo escudo) {
 		this.id = id;
 		this.nombre = nombre;
 		this.nivel = nivel;
 		this.arma = arma;
 		this.escudo = escudo;
-		this.caballo = caballo;
-		this.escudero = escudero;
 	}
 
 	public int getId() {
@@ -61,25 +57,9 @@ public class Caballero {
 		this.escudo = escudo;
 	}
 
-	public Caballo getCaballo() {
-		return caballo;
-	}
-
-	public void setCaballo(Caballo caballo) {
-		this.caballo = caballo;
-	}
-
-	public Escudero getEscudero() {
-		return escudero;
-	}
-
-	public void setEscudero(Escudero escudero) {
-		this.escudero = escudero;
-	}
-
 	@Override
 	public String toString() {
 		return "Caballero [id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + ", arma=" + arma + ", escudo="
-				+ escudo + ", caballo=" + caballo + ", escudero=" + escudero + "]";
+				+ escudo + "]";
 	}
 }
