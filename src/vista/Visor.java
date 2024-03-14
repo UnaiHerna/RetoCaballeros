@@ -3,6 +3,7 @@ package vista;
 import java.util.ArrayList;
 
 import modelo.Escudo;
+import modelo.Arma;
 
 public class Visor {
 	
@@ -12,6 +13,11 @@ public class Visor {
 			System.out.println(escudo);
 		}
 	}
-	
+  
+  public static void visualizarArmas(ArrayList<Arma> armas) {
+			for (Arma arma : armas) {
+				System.out.println(arma);
+			}
+	}
 	
 }

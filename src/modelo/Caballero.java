@@ -3,16 +3,20 @@ package modelo;
 public class Caballero {
 	private int id;
 	private String nombre;
-	private int nivel;
+	private int exp;
+	private int fuerza;
+	private int destreza;
 	private Arma arma;
 	private Escudo escudo;
 	
 	public Caballero() {}
 
-	public Caballero(int id, String nombre, int nivel, Arma arma, Escudo escudo) {
+	public Caballero(int id, String nombre, int exp, int fuerza, int destreza, Arma arma, Escudo escudo) {
 		this.id = id;
 		this.nombre = nombre;
-		this.nivel = nivel;
+		this.exp = exp;
+		this.fuerza = fuerza;
+		this.destreza = destreza;
 		this.arma = arma;
 		this.escudo = escudo;
 	}
@@ -33,12 +37,28 @@ public class Caballero {
 		this.nombre = nombre;
 	}
 
-	public int getNivel() {
-		return nivel;
+	public int getExp() {
+		return exp;
 	}
 
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
+
+	public int getFuerza() {
+		return fuerza;
+	}
+
+	public void setFuerza(int fuerza) {
+		this.fuerza = fuerza;
+	}
+
+	public int getDestreza() {
+		return destreza;
+	}
+
+	public void setDestreza(int destreza) {
+		this.destreza = destreza;
 	}
 
 	public Arma getArma() {
@@ -59,7 +79,9 @@ public class Caballero {
 
 	@Override
 	public String toString() {
-		return "Caballero [id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + ", arma=" + arma + ", escudo="
-				+ escudo + "]";
+		return "Caballero [id=" + id + ", nombre=" + nombre + ", exp=" + exp + ", fuerza=" + fuerza + ", destreza="
+				+ destreza + ", arma=" + arma + ", escudo=" + escudo + "]";
 	}
+
+	
 }
