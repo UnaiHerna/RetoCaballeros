@@ -4,6 +4,7 @@ public class Escudo {
 	private int id;
 	private String nombre;
 	private double defensa;
+	private double peso;
 	
 	public Escudo() {}
 	
@@ -33,8 +34,23 @@ public class Escudo {
 		return defensa;
 	}
 
-	public void setDefensa(double defensa) {
+	public void setDefensa(double peso) {
+		this.peso = peso;
+	}
+	
+	public double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(double defensa) {
 		this.defensa = defensa;
 	}
+
+	@Override
+	public String toString() {
+		return "Escudo [id=" + id + ", nombre=" + nombre + ", defensa=" + defensa + ", peso=" + peso + "]";
+	}
+	
+	
 }
 
