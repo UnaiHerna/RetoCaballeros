@@ -52,7 +52,7 @@ public static Scanner scan=new Scanner(System.in);
 				armas = gestorBBDD.getArmas();
 				Visor.visualizarArmas(armas);
 				
-				int idArma = Formulario.getIdArma();
+				int idArma = Formulario.introducirIdArma();
 				gestorBBDD.eliminarArma(idArma);
 				
 				System.out.println("Arma eliminada con exito");
@@ -63,8 +63,10 @@ public static Scanner scan=new Scanner(System.in);
 				armas = gestorBBDD.getArmas();
 				Visor.visualizarArmas(armas);
 				
+				
+				idArma = Formulario.introducirIdArma();
 				arma = Formulario.introducirDatosArma();
-				gestorBBDD.modificarArma(arma);
+				gestorBBDD.modificarArma(arma, idArma);
 				
 				System.out.println("Se ha modificado con exito");
 				break;

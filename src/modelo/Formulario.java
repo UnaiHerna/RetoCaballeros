@@ -10,8 +10,6 @@ public class Formulario {
 		
 		Arma arma = new Arma();
 		
-		arma.setId(getIdArma());
-		
 		System.out.println("Introduce el nombre del arma");
 		arma.setNombre(scan.nextLine());
 		
@@ -25,7 +23,7 @@ public class Formulario {
 		
 	}
 	
-	public static int getIdArma() {
+	public static int introducirIdArma() {
 		
 		int idArma;
 		

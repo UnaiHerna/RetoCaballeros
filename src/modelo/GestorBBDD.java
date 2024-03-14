@@ -22,6 +22,7 @@ public class GestorBBDD extends Conector{
 			
 			while(rs.next()) {
 				Arma arma = new Arma();
+				arma.setId(rs.getInt("id"));
 				arma.setNombre(rs.getString("nombre"));
 				arma.setDaño(rs.getDouble("daño"));
 				arma.setPeso(rs.getDouble("peso"));
@@ -76,7 +77,7 @@ public class GestorBBDD extends Conector{
 		}
 	}
 	
-	public void modificarArma(Arma arma) {
+	public void modificarArma(Arma arma, int idArma) {
 		
 		String sql = "UPDATE armas SET nombre=?, daño=?,peso=? WHERE id = ?";
 		
@@ -85,6 +86,7 @@ public class GestorBBDD extends Conector{
 			pst.setString(1, arma.getNombre());
 			pst.setDouble(2, arma.getDaño());
 			pst.setDouble(3, arma.getPeso());
+			pst.setInt(4, idArma);
 			
 			pst.executeUpdate();
 			
