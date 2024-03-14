@@ -1,6 +1,6 @@
 package controlador;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import modelo.*;
@@ -28,16 +28,53 @@ public class ControladorLuchas {
 					System.out.println("Saliendo del menu de luchas...");
 					break;
 				
-				case Menu.PRUEBA_PELEA:
-					Visor.visualizarCaballeros(gestorBBDD.getCaballeros());
-					System.out.println("Escribe el id del primer participante de la pelea");
-					Caballero caballero1 = gestorBBDD.getCaballero(Integer.parseInt(scan.nextLine()));
+				case Menu.VER_LUCHAS:
 					
-					System.out.println("Escribe el id del segundo participante de la pelea");	
-					Caballero caballero2 = gestorBBDD.getCaballero(Integer.parseInt(scan.nextLine()));
+					ArrayList<Lucha> luchas = gestorBBDD.getLuchas();
+					Visor.visualizarLuchas(luchas);
+					break;
+
+				case Menu.INSERTAR_LUCHA:
 					
-					Lucha lucha = new Lucha(new Date(), caballero1, caballero2);
-					lucha.lucha(caballero1, caballero2);
+					Lucha lucha = Formulario.introducirDatosLucha();
+					gestorBBDD.insertarLucha(lucha);
+					
+					System.out.println("Se ha introducido la lucha con exito");
+					break;
+					
+				case Menu.ELIMINAR_LUCHA:
+					
+					luchas = gestorBBDD.getLuchas();
+					Visor.visualizarLuchas(luchas);
+					
+					int idLucha = Formulario.introducirIdLucha();
+					gestorBBDD.eliminarLucha(idLucha);
+					
+					System.out.println("La lucha se ha eliminado con exito");
+					break;
+					
+				case Menu.MODIFICAR_LUCHA:
+					
+					luchas = gestorBBDD.getLuchas();
+					Visor.visualizarLuchas(luchas);
+					
+					idLucha = Formulario.introducirIdLucha();
+					lucha = Formulario.introducirDatosLucha();
+					gestorBBDD.modificarLucha(lucha, idLucha);
+					
+					System.out.println("Se ha modificado el escudo con exito");
+					break;
+					
+				
+				case Menu.COMIENZA_LUCHA:
+					
+					luchas = gestorBBDD.getLuchas();
+					Visor.visualizarLuchas(luchas);
+					
+					Lucha luchaPrueba = gestorBBDD.getLucha(Formulario.introducirIdLucha());
+					Caballero ganador = luchaPrueba.comienzoLucha();
+					System.out.println("El ganador es...");
+					System.out.println("¡¡¡"+ganador.getNombre()+"!!!");
 					break;
 					
 				default:

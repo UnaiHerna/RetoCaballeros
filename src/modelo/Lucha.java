@@ -51,10 +51,10 @@ public class Lucha {
 
 	@Override
 	public String toString() {
-		return id + "." + ", Fecha: " + fecha + ", 1.Caballero: " + caballero1.getNombre() + ", 2.Caballero: " + caballero2.getNombre();
+		return id + "." + " Fecha: " + fecha + ", 1.Caballero: " + caballero1.getNombre() + ", 2.Caballero: " + caballero2.getNombre();
 	}
 	
-	public Caballero lucha(Caballero caballero1, Caballero caballero2) {
+	public Caballero comienzoLucha() {
 		Random randomizador = new Random();
 		double numAleatorio = randomizador.nextDouble(1)/10;
 		double numAleatorio2 = randomizador.nextDouble(1)/10;
@@ -66,7 +66,7 @@ public class Lucha {
 				caballero1.getArma().getPeso()+caballero1.getEscudo().getPeso();
 		//System.out.println(ataqueCab1);
 		
-		double defensaCab1 = (caballero1.getFuerza()+caballero1.getEscudo().getDefensa());
+		double defensaCab1 = (caballero1.getFuerza()+caballero1.getEscudo().getDefensa()/2);
 		//System.out.println(defensaCab1);
 		
 		//Ataque y defensa Cab2
@@ -74,7 +74,7 @@ public class Lucha {
 				caballero2.getArma().getPeso()+caballero2.getEscudo().getPeso();
 		//System.out.println(ataqueCab2);
 		
-		double defensaCab2 = (caballero2.getFuerza()+caballero2.getEscudo().getDefensa());
+		double defensaCab2 = (caballero2.getFuerza()+caballero2.getEscudo().getDefensa()/2);
 		//System.out.println(defensaCab2);
 		
 		//Fuerza de lucha de los caballeros

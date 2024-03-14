@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.Date;
 import java.util.Scanner;
 
 import vista.Visor;
@@ -38,13 +39,8 @@ public class Formulario {
 	}
 	
 	public static int introducirIdCaballero() {
-		
-		int idCaballero;
-		
 		System.out.println("Introduce el id del caballero");
-		idCaballero = Integer.parseInt(scan.nextLine());
-		
-		return idCaballero;
+		return Integer.parseInt(scan.nextLine());
 		
 	}
 	
@@ -65,13 +61,8 @@ public class Formulario {
 	}
 	
 	public static int introducirIdEscudo() {
-		
-		int idEscudo;
-		
 		System.out.println("Introducir el id del escudo");
-		idEscudo = Integer.parseInt(scan.nextLine());
-		
-		return idEscudo;
+		return Integer.parseInt(scan.nextLine());
   }
 	
 	public static Arma introducirDatosArma() {
@@ -92,13 +83,28 @@ public class Formulario {
 	}
 	
 	public static int introducirIdArma() {
-		
-		int idArma;
-		
 		System.out.println("Introduce el id del arma que quieres");
-		idArma = Integer.parseInt(scan.nextLine());
+		return Integer.parseInt(scan.nextLine());
+	}
+
+	public static int introducirIdLucha() {
+		System.out.println("Introduce el id de la lucha que quieres");
+		return Integer.parseInt(scan.nextLine());
+	}
+
+	public static Lucha introducirDatosLucha() {
+		Lucha lucha = new Lucha();
+		GestorBBDD gestorBBDD = new GestorBBDD();
 		
-		return idArma;
+		lucha.setFecha(new Date());
+		
+		Visor.visualizarCaballeros(gestorBBDD.getCaballeros());
+		lucha.setCaballero1(gestorBBDD.getCaballero(introducirIdCaballero()));
+		
+		Visor.visualizarCaballeros(gestorBBDD.getCaballeros());
+		lucha.setCaballero2(gestorBBDD.getCaballero(introducirIdCaballero()));
+		
+		return lucha;
 	}
 	
 }
