@@ -35,7 +35,15 @@ public class Escudo {
 		return defensa;
 	}
 
-	public void setDefensa(double defensa) {
+	public void setDefensa(double peso) {
+		this.peso = peso;
+	}
+	
+	public double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(double defensa) {
 		this.defensa = defensa;
 	}
 
@@ -51,6 +59,5 @@ public class Escudo {
 	public String toString() {
 		return "Escudo [id=" + id + ", nombre=" + nombre + ", defensa=" + defensa + ", peso=" + peso + "]";
 	}
-	
 }
 
