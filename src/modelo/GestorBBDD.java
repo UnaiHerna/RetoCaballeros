@@ -159,7 +159,7 @@ public class GestorBBDD extends Conector{
 	
 	public Caballero getCaballero(int idCaballero) {
 		
-		String sql ="SELECT * FROM caballeros WHERE id=?";
+		String sql ="SELECT * FROM caballero WHERE id=?";
 		
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
@@ -342,6 +342,110 @@ public class GestorBBDD extends Conector{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public ArrayList<Lucha> getLuchas() {
+
+		ArrayList<Lucha> luchas = new ArrayList<Lucha>();
+		
+		String sql = "SELECT * FROM luchas";
+		
+		try {
+			Statement st = cn.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+		 
+			while(rs.next()){
+				Lucha lucha = new Lucha();
+				lucha.setId(rs.getInt("id"));
+				lucha.setFecha(rs.getDate("fecha"));
+				lucha.setCaballero1(getCaballero(rs.getInt("id_caballero1")));
+				lucha.setCaballero2(getCaballero(rs.getInt("id_caballero2")));
+				
+				luchas.add(lucha);
+				
+			}
+			
+			return luchas;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public void insertarLucha(Lucha lucha) {
+		String sql = "INSERT INTO luchas (fecha,id_caballero1,id_caballero2) VALUES (?,?,?)";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setDate(1, new java.sql.Date(lucha.getFecha().getTime()));
+			pst.setInt(2, lucha.getCaballero1().getId());
+			pst.setInt(3, lucha.getCaballero2().getId());
+			pst.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void eliminarLucha(int idLucha) {
+		String sql = "DELETE FROM luchas WHERE id = ?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, idLucha);
+			
+			pst.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void modificarLucha(Lucha lucha, int idLucha) {
+		String sql = "UPDATE luchas SET fecha=?, id_caballero1=?, id_caballero2=? WHERE id = ?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setDate(1, new java.sql.Date(lucha.getFecha().getTime()));
+			pst.setInt(2, lucha.getCaballero1().getId());
+			pst.setInt(3, lucha.getCaballero2().getId());
+			pst.setInt(4, idLucha);
+			
+			pst.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Lucha getLucha(int idLucha) {
+		
+		String sql ="SELECT * FROM luchas WHERE id=?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, idLucha);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				Lucha lucha = new Lucha();
+				lucha.setId(rs.getInt("id"));
+				lucha.setFecha(rs.getDate("fecha"));
+				lucha.setCaballero1(getCaballero(rs.getInt("id_caballero1")));
+				lucha.setCaballero2(getCaballero(rs.getInt("id_caballero2")));
+				return lucha;
+			}	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 }

@@ -23,12 +23,12 @@ public class Menu {
 	public final static int INSERTAR_ARMAS = 2;
 	public final static int ELIMINAR_ARMA = 3;
 	public final static int MODIFICAR_ARMA = 4;
-	public final static int PRUEBA_PELEA = 5;
 	
-	public final static int VER_LUCHA = 1;
+	public final static int VER_LUCHAS = 1;
 	public final static int INSERTAR_LUCHA = 2;
 	public final static int ELIMINAR_LUCHA = 3;
 	public final static int MODIFICAR_LUCHA = 4;
+	public final static int COMIENZA_LUCHA = 5;
 	
 	public static void menuPrincipal() {
 		
@@ -71,10 +71,11 @@ public class Menu {
 	
 	public static void menuLucha() {
 		System.out.println("\n--MENU--");
-		System.out.println("- Salir");
-		System.out.println("- Visualizar todas las armas");
-		System.out.println("- Crear armas nuevas");
-		System.out.println("- Elimina armas");
-		System.out.println("- Modifica las armas ya creadas");
+		System.out.println(SALIR + "- Salir");
+		System.out.println(VER_LUCHAS + "- Visualizar todas las luchas");
+		System.out.println(INSERTAR_LUCHA + "- Crear enfrentamientos nuevos");
+		System.out.println(ELIMINAR_LUCHA +"- Elimina luchas");
+		System.out.println(MODIFICAR_LUCHA +"- Modifica las luchas ya creadas");
+		System.out.println(COMIENZA_LUCHA +"- COMIENZA LA LUCHA");
 	}
 }
