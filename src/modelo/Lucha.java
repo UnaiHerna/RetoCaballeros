@@ -55,4 +55,11 @@ public class Lucha {
 				+ "]";
 	}
 	
+	public Caballero lucha(Caballero caballero1, Caballero caballero2) {
+		int fuerzaDeLuchaCab1;
+		
+		return caballero1;
+		
+	}
+	
 }
