@@ -7,7 +7,7 @@ public class Arma {
 	private double peso;
 	
 	public Arma() {}
-	
+  
 	public Arma(int id, String nombre, double daño, double peso) {
 		this.id = id;
 		this.nombre = nombre;
@@ -38,6 +38,7 @@ public class Arma {
 	public void setDaño(double daño) {
 		this.daño = daño;
 	}
+
 	
 	public double getPeso() {
 		return peso;
@@ -52,6 +53,4 @@ public class Arma {
 		return "Arma [id=" + id + ", nombre=" + nombre + ", daño=" + daño + ", peso=" + peso + "]";
 	}
 
-	
-	
 }

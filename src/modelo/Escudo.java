@@ -4,13 +4,15 @@ public class Escudo {
 	private int id;
 	private String nombre;
 	private double defensa;
+	private double peso;
 	
 	public Escudo() {}
-	
-	public Escudo(int id, String nombre, double defensa) {
+
+	public Escudo(int id, String nombre, double defensa, double peso) {
 		this.id = id;
 		this.nombre = nombre;
 		this.defensa = defensa;
+		this.peso = peso;
 	}
 
 	public int getId() {
@@ -36,5 +38,19 @@ public class Escudo {
 	public void setDefensa(double defensa) {
 		this.defensa = defensa;
 	}
+
+	public double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(double peso) {
+		this.peso = peso;
+	}
+
+	@Override
+	public String toString() {
+		return "Escudo [id=" + id + ", nombre=" + nombre + ", defensa=" + defensa + ", peso=" + peso + "]";
+	}
+	
 }
 
