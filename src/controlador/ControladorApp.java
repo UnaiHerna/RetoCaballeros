@@ -8,21 +8,21 @@ import modelo.*;
 import vista.Visor;
 
 public class ControladorApp {
-
-public final static int SALIR = 0;
-public final static int VER_ESCUDOS = 1;
-public final static int INSERTAR_ESCUDOS = 2;
-public final static int ELIMINAR_ESCUDOS = 3;
-public final static int MODIFICAR_ESCUDOS = 4;
 	
-public static Scanner scan=new Scanner(System.in);
-
 	public final static int SALIR = 0;
+	public final static int VER_ESCUDOS = 1;
+	public final static int INSERTAR_ESCUDOS = 2;
+	public final static int ELIMINAR_ESCUDOS = 3;
+	public final static int MODIFICAR_ESCUDOS = 4;
+	
 	public final static int VER_ARMAS = 1;
 	public final static int INSERTAR_ARMAS = 2;
 	public final static int ELIMINAR_ARMA = 3;
 	public final static int MODIFICAR_ARMA = 4;
 	public final static int PRUEBA_PELEA = 5;
+	
+		
+	public static Scanner scan=new Scanner(System.in);
 
 	public static void run() {
 		GestorBBDD gestorBBDD = new GestorBBDD();

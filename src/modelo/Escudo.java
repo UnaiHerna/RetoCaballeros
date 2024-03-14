@@ -35,18 +35,10 @@ public class Escudo {
 		return defensa;
 	}
 
-	public void setDefensa(double peso) {
-		this.peso = peso;
-	}
-	
-	public double getPeso() {
-		return peso;
-	}
-
-	public void setPeso(double defensa) {
+	public void setDefensa(double defensa) {
 		this.defensa = defensa;
 	}
-
+	
 	public double getPeso() {
 		return peso;
 	}

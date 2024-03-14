@@ -16,7 +16,11 @@ public class GestorBBDD extends Conector{
 		
 		String sql = "SELECT * FROM escudos";
     
-    while(rs.next()) {
+		try {
+			
+			Statement st = cn.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while(rs.next()) {
 				Escudo escudo = new Escudo();
 				escudo.setId(rs.getInt("id"));
 				escudo.setNombre(rs.getString("nombre"));
@@ -27,6 +31,10 @@ public class GestorBBDD extends Conector{
 			}
 			
 			return escudos;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
   }
   
 	public ArrayList<Arma> getArmas(){
@@ -39,7 +47,7 @@ public class GestorBBDD extends Conector{
 			Statement st = cn.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 		 
-      while(rs.next()){
+			while(rs.next()){
 				Arma arma = new Arma();
 				arma.setId(rs.getInt("id"));
 				arma.setNombre(rs.getString("nombre"));
@@ -70,12 +78,11 @@ public class GestorBBDD extends Conector{
 			pst.setString(1, escudo.getNombre());
 			pst.setDouble(2, escudo.getDefensa());
 			pst.setDouble(3, escudo.getPeso());
-      pst.execute();
+			pst.execute();
 
-      } catch (SQLException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
   }
   
 	public void insertarArmas(Arma arma) {
@@ -90,7 +97,6 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -105,10 +111,11 @@ public class GestorBBDD extends Conector{
 			pst.setInt(1, idEscudo);
 			
 			pst.execute();
-    } catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
 	public void eliminarArma(int idArma) {
 		
 		String sql = "DELETE FROM armas WHERE id = ?";
@@ -139,10 +146,9 @@ public class GestorBBDD extends Conector{
 			
 			pst.executeUpdate();
       
-      } catch (SQLException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-		  }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void modificarArma(Arma arma, int idArma) {
@@ -159,7 +165,6 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
