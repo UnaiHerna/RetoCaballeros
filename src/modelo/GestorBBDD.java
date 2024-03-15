@@ -247,30 +247,23 @@ public class GestorBBDD extends Conector{
 		
 		String sql ="DELETE FROM caballero WHERE id = ?";
 		
-		try {
-			PreparedStatement pst = cn.prepareStatement(sql);
-			pst.setInt(1, idCaballero);
-			
-			pst.execute();
-			
-		} catch (SQLException e) {
-			String respuesta = Formulario.yesOrNo();
-			
-			if (respuesta.equalsIgnoreCase("N")) {
-				System.out.println("No se ha borrado el caballero");
-			} else {
-				eliminarLuchaXIDParticipante(idCaballero);
-				try {
-					PreparedStatement pst;
+		boolean salir = false;
+		
+		while(!salir) {
+			try {
+				PreparedStatement pst = cn.prepareStatement(sql);
+				pst.setInt(1, idCaballero);
 				
-					pst = cn.prepareStatement(sql);
-					pst.setInt(1, idCaballero);
-					
-					pst.execute();
-				} catch (Exception e1) {
-					e1.printStackTrace();
+				pst.execute();
+				salir=true;
+			} catch (SQLException e) {
+				String respuesta = Formulario.yesOrNo();
+				if (respuesta.equalsIgnoreCase("N")) {
+					System.out.println("No se ha borrado el caballero");
+					salir=true;
+				} else {
+					eliminarLuchaXIDParticipante(idCaballero);
 				}
-				
 			}
 		}
 	}
