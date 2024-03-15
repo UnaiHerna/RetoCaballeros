@@ -99,10 +99,10 @@ public class Formulario {
 		lucha.setFecha(new Date());
 		
 		Visor.visualizarCaballeros(gestorBBDD.getCaballeros());
-		lucha.setCaballero1(gestorBBDD.getCaballero(introducirIdCaballero()));
+		lucha.setGanador(gestorBBDD.getCaballero(introducirIdCaballero()));
 		
 		Visor.visualizarCaballeros(gestorBBDD.getCaballeros());
-		lucha.setCaballero2(gestorBBDD.getCaballero(introducirIdCaballero()));
+		lucha.setPerdedor(gestorBBDD.getCaballero(introducirIdCaballero()));
 		
 		return lucha;
 	}

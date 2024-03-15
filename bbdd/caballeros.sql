@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-03-2024 a las 10:37:57
+-- Tiempo de generación: 15-03-2024 a las 08:44:51
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,7 +45,8 @@ INSERT INTO `armas` (`id`, `nombre`, `daño`, `peso`) VALUES
 (4, 'Katana Uchigatana', 120, 6),
 (5, 'Maza Estrella del alba', 100, 4),
 (6, 'Alabarda de Caballero Negro', 245, 14),
-(7, 'Ultra espadón del humo', 310, 25.5);
+(7, 'Ultra espadón del humo', 310, 25.5),
+(9, 'Gran garrote', 154, 16);
 
 -- --------------------------------------------------------
 
@@ -73,8 +74,9 @@ INSERT INTO `caballero` (`id`, `nombre`, `exp`, `fuerza`, `destreza`, `id_arma`,
 (3, 'Havel la Roca', '15', 50, 2, 7, 3),
 (4, 'Príncipe Ricard', '5', 2, 35, 1, 4),
 (5, 'Yuria de Londor', '3', 10, 12, 6, 6),
-(6, 'El Irrompible Parches', '6', 13, 13, 6, 2),
-(7, 'Radahn el Azote de las Estrellas', '20', 45, 23, 7, 3);
+(6, 'El Irrompible Parches', '7', 13, 13, 6, 3),
+(7, 'Radahn el Azote de las Estrellas', '20', 45, 23, 7, 3),
+(8, 'Unai', '3', 18, 21, 9, 3);
 
 -- --------------------------------------------------------
 
@@ -158,9 +160,18 @@ INSERT INTO `escudos` (`id`, `nombre`, `defensa`, `peso`) VALUES
 CREATE TABLE `luchas` (
   `id` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `id_caballero1` int(11) NOT NULL,
-  `id_caballero2` int(11) NOT NULL
+  `id_ganador` int(11) NOT NULL,
+  `id_perdedor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `luchas`
+--
+
+INSERT INTO `luchas` (`id`, `fecha`, `id_ganador`, `id_perdedor`) VALUES
+(1, '2024-03-14', 1, 2),
+(9, '2024-03-15', 3, 2),
+(11, '2024-03-15', 7, 6);
 
 --
 -- Índices para tablas volcadas
@@ -207,8 +218,9 @@ ALTER TABLE `escudos`
 --
 ALTER TABLE `luchas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_ganador` (`id_caballero1`),
-  ADD KEY `id_caballero2` (`id_caballero2`);
+  ADD KEY `id_ganador` (`id_ganador`),
+  ADD KEY `id_caballero2` (`id_perdedor`),
+  ADD KEY `id_ganador_2` (`id_ganador`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -218,13 +230,13 @@ ALTER TABLE `luchas`
 -- AUTO_INCREMENT de la tabla `armas`
 --
 ALTER TABLE `armas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `caballero`
 --
 ALTER TABLE `caballero`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `caballos`
@@ -248,7 +260,7 @@ ALTER TABLE `escudos`
 -- AUTO_INCREMENT de la tabla `luchas`
 --
 ALTER TABLE `luchas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas
@@ -277,8 +289,8 @@ ALTER TABLE `escuderos`
 -- Filtros para la tabla `luchas`
 --
 ALTER TABLE `luchas`
-  ADD CONSTRAINT `luchas_ibfk_1` FOREIGN KEY (`id_caballero1`) REFERENCES `caballero` (`id`),
-  ADD CONSTRAINT `luchas_ibfk_2` FOREIGN KEY (`id_caballero2`) REFERENCES `caballero` (`id`);
+  ADD CONSTRAINT `luchas_ibfk_1` FOREIGN KEY (`id_ganador`) REFERENCES `caballero` (`id`),
+  ADD CONSTRAINT `luchas_ibfk_2` FOREIGN KEY (`id_perdedor`) REFERENCES `caballero` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

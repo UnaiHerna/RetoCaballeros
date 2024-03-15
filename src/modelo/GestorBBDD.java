@@ -358,8 +358,8 @@ public class GestorBBDD extends Conector{
 				Lucha lucha = new Lucha();
 				lucha.setId(rs.getInt("id"));
 				lucha.setFecha(rs.getDate("fecha"));
-				lucha.setCaballero1(getCaballero(rs.getInt("id_caballero1")));
-				lucha.setCaballero2(getCaballero(rs.getInt("id_caballero2")));
+				lucha.setGanador(getCaballero(rs.getInt("id_ganador")));
+				lucha.setPerdedor(getCaballero(rs.getInt("id_perdedor")));
 				
 				luchas.add(lucha);
 				
@@ -375,13 +375,13 @@ public class GestorBBDD extends Conector{
 	}
 
 	public void insertarLucha(Lucha lucha) {
-		String sql = "INSERT INTO luchas (fecha,id_caballero1,id_caballero2) VALUES (?,?,?)";
+		String sql = "INSERT INTO luchas (fecha,id_ganador,id_perdedor) VALUES (?,?,?)";
 		
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setDate(1, new java.sql.Date(lucha.getFecha().getTime()));
-			pst.setInt(2, lucha.getCaballero1().getId());
-			pst.setInt(3, lucha.getCaballero2().getId());
+			pst.setInt(2, lucha.getGanador().getId());
+			pst.setInt(3, lucha.getPerdedor().getId());
 			pst.execute();
 			
 		} catch (SQLException e) {
@@ -406,13 +406,13 @@ public class GestorBBDD extends Conector{
 	}
 
 	public void modificarLucha(Lucha lucha, int idLucha) {
-		String sql = "UPDATE luchas SET fecha=?, id_caballero1=?, id_caballero2=? WHERE id = ?";
+		String sql = "UPDATE luchas SET fecha=?, id_ganador=?, id_perdedor=? WHERE id = ?";
 		
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setDate(1, new java.sql.Date(lucha.getFecha().getTime()));
-			pst.setInt(2, lucha.getCaballero1().getId());
-			pst.setInt(3, lucha.getCaballero2().getId());
+			pst.setInt(2, lucha.getGanador().getId());
+			pst.setInt(3, lucha.getPerdedor().getId());
 			pst.setInt(4, idLucha);
 			
 			pst.executeUpdate();
@@ -436,8 +436,8 @@ public class GestorBBDD extends Conector{
 				Lucha lucha = new Lucha();
 				lucha.setId(rs.getInt("id"));
 				lucha.setFecha(rs.getDate("fecha"));
-				lucha.setCaballero1(getCaballero(rs.getInt("id_caballero1")));
-				lucha.setCaballero2(getCaballero(rs.getInt("id_caballero2")));
+				lucha.setGanador(getCaballero(rs.getInt("id_ganador")));
+				lucha.setPerdedor(getCaballero(rs.getInt("id_perdedor")));
 				return lucha;
 			}	
 			

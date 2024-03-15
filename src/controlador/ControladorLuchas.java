@@ -37,9 +37,12 @@ public class ControladorLuchas {
 				case Menu.INSERTAR_LUCHA:
 					
 					Lucha lucha = Formulario.introducirDatosLucha();
+					//Se llaman ganador y perdedor pero se decide en comienzo lucha quien será
+					lucha.comienzoLucha(lucha.getGanador(), lucha.getPerdedor()); 
 					gestorBBDD.insertarLucha(lucha);
 					
-					System.out.println("Se ha introducido la lucha con exito");
+					System.out.println("El ganador es...");
+					System.out.println("¡¡¡"+lucha.getGanador().getNombre()+"!!!");
 					break;
 					
 				case Menu.ELIMINAR_LUCHA:
@@ -60,23 +63,13 @@ public class ControladorLuchas {
 					
 					idLucha = Formulario.introducirIdLucha();
 					lucha = Formulario.introducirDatosLucha();
+					lucha.comienzoLucha(lucha.getGanador(), lucha.getPerdedor());
 					gestorBBDD.modificarLucha(lucha, idLucha);
 					
-					System.out.println("Se ha modificado el escudo con exito");
-					break;
-					
-				
-				case Menu.COMIENZA_LUCHA:
-					
-					luchas = gestorBBDD.getLuchas();
-					Visor.visualizarLuchas(luchas);
-					
-					Lucha luchaPrueba = gestorBBDD.getLucha(Formulario.introducirIdLucha());
-					Caballero ganador = luchaPrueba.comienzoLucha();
 					System.out.println("El ganador es...");
-					System.out.println("¡¡¡"+ganador.getNombre()+"!!!");
+					System.out.println("¡¡¡"+lucha.getGanador().getNombre()+"!!!");
 					break;
-					
+
 				default:
 					throw new IllegalArgumentException("Unexpected value: " + opcion);
 				}
