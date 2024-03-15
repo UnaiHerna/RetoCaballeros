@@ -6,15 +6,15 @@ import java.util.Random;
 public class Lucha {
 	private int id;
 	private Date fecha;
-	private Caballero caballero1;
-	private Caballero caballero2;
+	private Caballero ganador;
+	private Caballero perdedor;
 	
 	public Lucha() {}
 
 	public Lucha(Date fecha, Caballero caballero1, Caballero caballero2) {
 		this.fecha = fecha;
-		this.caballero1 = caballero1;
-		this.caballero2 = caballero2;
+		this.ganador = caballero1;
+		this.perdedor = caballero2;
 	}
 
 	public int getId() {
@@ -33,28 +33,28 @@ public class Lucha {
 		this.fecha = fecha;
 	}
 
-	public Caballero getCaballero1() {
-		return caballero1;
+	public Caballero getGanador() {
+		return ganador;
 	}
 
-	public void setCaballero1(Caballero caballero1) {
-		this.caballero1 = caballero1;
+	public void setGanador(Caballero caballero1) {
+		this.ganador = caballero1;
 	}
 
-	public Caballero getCaballero2() {
-		return caballero2;
+	public Caballero getPerdedor() {
+		return perdedor;
 	}
 
-	public void setCaballero2(Caballero caballero2) {
-		this.caballero2 = caballero2;
+	public void setPerdedor(Caballero caballero2) {
+		this.perdedor = caballero2;
 	}
 
 	@Override
 	public String toString() {
-		return id + "." + " Fecha: " + fecha + ", 1.Caballero: " + caballero1.getNombre() + ", 2.Caballero: " + caballero2.getNombre();
+		return id + "." + " Fecha: " + fecha + ", Ganador: " + ganador.getNombre() + ", Perdedor: " + perdedor.getNombre();
 	}
 	
-	public Caballero comienzoLucha() {
+	public void comienzoLucha(Caballero caballero1, Caballero caballero2) {
 		Random randomizador = new Random();
 		double numAleatorio = randomizador.nextDouble(1)/10;
 		double numAleatorio2 = randomizador.nextDouble(1)/10;
@@ -86,9 +86,11 @@ public class Lucha {
 		
 		//Decide el ganador de la lucha
 		if(fuerzaDeLuchaCab1>=fuerzaDeLuchaCab2) {
-			return caballero1;
+			this.setGanador(caballero1);
+			this.setPerdedor(caballero2);
 		}else {
-			return caballero2;
+			this.setGanador(caballero2);
+			this.setPerdedor(caballero1);
 		}
 		
 	}
