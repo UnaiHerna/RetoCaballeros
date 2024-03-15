@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import controlador.Conector;
 
@@ -253,10 +254,45 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			System.out.println("No puedes eliminar un caballero con una lucha creada");
+			@SuppressWarnings("resource")
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("Quieres eliminar un caballero con una lucha creada? "
+					+ "\nSi lo haces todas sus luchas se borrarán (Y/n)");
+			if (scanner.nextLine().equalsIgnoreCase("N")) {
+				System.out.println("No se ha borrado el caballero");
+			} else {
+				eliminarLuchaXIDParticipante(idCaballero);
+				try {
+					PreparedStatement pst;
+				
+					pst = cn.prepareStatement(sql);
+					pst.setInt(1, idCaballero);
+					
+					pst.execute();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+			}
 		}
 	}
 	
+	private void eliminarLuchaXIDParticipante(int idCaballero) {
+		String sql = "DELETE FROM luchas WHERE id_ganador = ? OR id_perdedor = ?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, idCaballero);
+			pst.setInt(2, idCaballero);
+			
+			pst.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Lo ha hecho correctamente");
+	}
+
 	public void eliminarEscudo(int idEscudo) {
 		
 		String sql = "DELETE FROM escudos WHERE id = ?";
