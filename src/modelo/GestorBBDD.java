@@ -253,7 +253,7 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No puedes eliminar un caballero con una lucha creada");
 		}
 	}
 	
@@ -267,7 +267,7 @@ public class GestorBBDD extends Conector{
 			
 			pst.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No puedes eliminar un escudo con un caballero usándolo");
 		}
 	}
 	
@@ -282,7 +282,7 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No puedes eliminar un arma con un caballero usándolo");
 		}
 		
 	}
