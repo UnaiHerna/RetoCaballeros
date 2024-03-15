@@ -254,11 +254,9 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			@SuppressWarnings("resource")
-			Scanner scanner = new Scanner(System.in);
-			System.out.println("Quieres eliminar un caballero con una lucha creada? "
-					+ "\nSi lo haces todas sus luchas se borrarán (Y/n)");
-			if (scanner.nextLine().equalsIgnoreCase("N")) {
+			String respuesta = Formulario.yesOrNo();
+			
+			if (respuesta.equalsIgnoreCase("N")) {
 				System.out.println("No se ha borrado el caballero");
 			} else {
 				eliminarLuchaXIDParticipante(idCaballero);

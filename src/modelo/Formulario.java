@@ -106,5 +106,12 @@ public class Formulario {
 		
 		return lucha;
 	}
+
+	public static String yesOrNo() {
+		System.out.println("Quieres eliminar un caballero con una lucha creada? "
+				+ "\nSi lo haces todas sus luchas se borrarán (Y/n)");
+		
+		return scan.nextLine();
+	}
 	
 }
