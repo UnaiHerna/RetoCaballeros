@@ -105,6 +105,27 @@ public class Formulario {
 		
 	}
 	
+	public static Escudero introducirDatosEscudero() {
+		
+		Escudero escudero = new Escudero();
+		GestorBBDD gestorBBDD = new GestorBBDD();
+		
+		System.out.println("Introduce el nombre del escudero");
+		escudero.setNombre(scan.nextLine());
+		
+		System.out.println("Introduce la experiencia del escudero");
+		escudero.setExp(Integer.parseInt(scan.nextLine()));
+		
+		System.out.println("Introduce la fortaleza del escudero");
+		escudero.setFortaleza(Double.parseDouble(scan.nextLine()));
+		
+		Visor.visualizarCaballeros(gestorBBDD.getCaballeros());
+		escudero.setCaballero(gestorBBDD.getCaballero(Formulario.introducirIdCaballero()));
+		
+		return escudero;
+		
+	}
+	
 	public static int introducirIdArma() {
 		System.out.println("Introduce el id del arma que quieres");
 		return Integer.parseInt(scan.nextLine());
@@ -132,6 +153,11 @@ public class Formulario {
 	
 	public static int introducirIdCaballo() {
 		System.out.println("Introduce el id del caballo que quieres");
+		return Integer.parseInt(scan.nextLine());
+	}
+	
+	public static int introducirIdEscudero() {
+		System.out.println("Introduce el id del escudero que quieres");
 		return Integer.parseInt(scan.nextLine());
 	}
 

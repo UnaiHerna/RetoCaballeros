@@ -7,6 +7,7 @@ import modelo.Lucha;
 import modelo.Arma;
 import modelo.Caballero;
 import modelo.Caballo;
+import modelo.Escudero;
 
 public class Visor {
 	
@@ -39,6 +40,13 @@ public class Visor {
 		
 		for (Caballo caballo : caballos) {
 			System.out.println(caballo);
+		}
+	}
+	
+	public static void visualizarEscuderos(ArrayList<Escudero> escuderos) {
+		
+		for (Escudero escudero : escuderos) {
+			System.out.println(escudero);
 		}
 	}
   

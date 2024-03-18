@@ -9,6 +9,7 @@ public class Menu {
 	public final static int ESCUDOS = 3;
 	public final static int LUCHAS = 4;
 	public final static int CABALLOS = 5;
+	public final static int ESCUDEROS = 6;
 	
 	public final static int VER_CABALLEROS = 1;
 	public final static int INSERTAR_CABALLEROS = 2;
@@ -35,6 +36,11 @@ public class Menu {
 	public final static int ELIMINAR_CABALLOS = 3;
 	public final static int MODIFICAR_CABALLOS = 4;
 	
+	public final static int VER_ESCUDEROS = 1;
+	public final static int INSERTAR_ESCUDEROS = 2;
+	public final static int ELIMINAR_ESCUDEROS = 3;
+	public final static int MODIFICAR_ESCUDEROS = 4;
+	
 	
 	public static void menuPrincipal() {
 		
@@ -45,6 +51,7 @@ public class Menu {
 		System.out.println(ESCUDOS + "- Entrar al menu de escudos");
 		System.out.println(LUCHAS + "- Entrar al menu de lucha");
 		System.out.println(CABALLOS + "- Entrar al menu de caballos");
+		System.out.println(ESCUDEROS + "- Entrar al menu de escuderos");
 	}
 	
 	public static void menuCaballeros() {
@@ -94,4 +101,14 @@ public class Menu {
 		System.out.println(MODIFICAR_CABALLOS +"- Modifica los caballos existentes");
 	
 	}
+	
+	public static void menuEscuderos() {
+		System.out.println("\n--MENU--");
+		System.out.println(SALIR + "- Salir");
+		System.out.println(VER_ESCUDEROS + "- Visualizar todos los escuderos");
+		System.out.println(INSERTAR_ESCUDEROS + "- Crear un nuevo escudero");
+		System.out.println(ELIMINAR_ESCUDEROS +"- Elimina los escuderos existentes");
+		System.out.println(MODIFICAR_ESCUDEROS +"- Modifica los escuderos existentes");
+	}
+	
 }
