@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-03-2024 a las 08:44:51
+-- Tiempo de generación: 18-03-2024 a las 14:20:50
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -57,7 +57,7 @@ INSERT INTO `armas` (`id`, `nombre`, `daño`, `peso`) VALUES
 CREATE TABLE `caballero` (
   `id` int(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
-  `exp` varchar(3) NOT NULL,
+  `exp` int(3) NOT NULL,
   `fuerza` int(11) NOT NULL,
   `destreza` int(11) NOT NULL,
   `id_arma` int(255) NOT NULL,
@@ -69,14 +69,13 @@ CREATE TABLE `caballero` (
 --
 
 INSERT INTO `caballero` (`id`, `nombre`, `exp`, `fuerza`, `destreza`, `id_arma`, `id_escudo`) VALUES
-(1, 'Siegmeyer de Catarina', '10', 20, 12, 2, 1),
-(2, 'Solaire de Astora', '8', 13, 15, 3, 5),
-(3, 'Havel la Roca', '15', 50, 2, 7, 3),
-(4, 'Príncipe Ricard', '5', 2, 35, 1, 4),
-(5, 'Yuria de Londor', '3', 10, 12, 6, 6),
-(6, 'El Irrompible Parches', '7', 13, 13, 6, 3),
-(7, 'Radahn el Azote de las Estrellas', '20', 45, 23, 7, 3),
-(8, 'Unai', '3', 18, 21, 9, 3);
+(1, 'Siegmeyer de Catarina', 10, 20, 12, 2, 1),
+(2, 'Solaire de Astora', 8, 13, 15, 3, 5),
+(3, 'Havel la Roca', 15, 50, 2, 7, 3),
+(4, 'Príncipe Ricard', 5, 2, 35, 1, 4),
+(5, 'Yuria de Londor', 3, 10, 12, 6, 6),
+(6, 'El Irrompible Parches', 7, 13, 13, 6, 3),
+(7, 'Radahn el Azote de las Estrellas', 20, 45, 23, 7, 3);
 
 -- --------------------------------------------------------
 
@@ -171,7 +170,8 @@ CREATE TABLE `luchas` (
 INSERT INTO `luchas` (`id`, `fecha`, `id_ganador`, `id_perdedor`) VALUES
 (1, '2024-03-14', 1, 2),
 (9, '2024-03-15', 3, 2),
-(11, '2024-03-15', 7, 6);
+(11, '2024-03-15', 7, 6),
+(16, '2024-03-18', 7, 3);
 
 --
 -- Índices para tablas volcadas
@@ -236,13 +236,13 @@ ALTER TABLE `armas`
 -- AUTO_INCREMENT de la tabla `caballero`
 --
 ALTER TABLE `caballero`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `caballos`
 --
 ALTER TABLE `caballos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `escuderos`
@@ -260,7 +260,7 @@ ALTER TABLE `escudos`
 -- AUTO_INCREMENT de la tabla `luchas`
 --
 ALTER TABLE `luchas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restricciones para tablas volcadas
