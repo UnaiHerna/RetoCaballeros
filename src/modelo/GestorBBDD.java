@@ -188,9 +188,9 @@ public class GestorBBDD extends Conector{
 		return null;
 	}
 	
-	public Caballo getCaballo( int idCaballo){
+	public Caballo getCaballo(int idCaballo) {
 		
-		String sql = "SELECT * FROM caballos WHERE id_caballero = ?";
+		String sql ="SELECT * FROM caballos WHERE id=?";
 		
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
@@ -201,19 +201,80 @@ public class GestorBBDD extends Conector{
 			while(rs.next()) {
 				Caballo caballo = new Caballo();
 				caballo.setId(rs.getInt("id"));
-				caballo.setNombre(rs.getString("Nombre"));
-				caballo.setvMax(rs.getDouble("vMAx"));
+				caballo.setNombre(rs.getString("nombre"));
+				caballo.setvMax(rs.getDouble("vMax"));
 				caballo.setResistencia(rs.getDouble("resistencia"));
 				caballo.setCaballero(getCaballero(rs.getInt("id_caballero")));
-				
+			
 				return caballo;
-			}
+			}	
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		return null;
+		
+	}
+	
+	public ArrayList<Escudero> getEscuderos(){
+		
+		ArrayList<Escudero> escuderos = new ArrayList<Escudero>();
+		
+		String sql = "SELECT * FROM escuderos";
+		
+		try {
+			Statement st = cn.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			
+			while(rs.next()) {
+				Escudero escudero = new Escudero();
+				escudero.setId(rs.getInt("id"));
+				escudero.setNombre(rs.getString("nombre"));
+				escudero.setExp(rs.getInt("exp"));
+				escudero.setFortaleza(rs.getDouble("fortaleza"));
+				escudero.setCaballero(getCaballero(rs.getInt("id_caballero")));
+				
+				escuderos.add(escudero);
+			}
+			
+			return escuderos;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
+	
+	public Escudero getEscudero(int idEscudero) {
+		
+		String sql ="SELECT * FROM escuderos WHERE id=?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, idEscudero);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				Escudero escudero = new Escudero();
+				escudero.setId(rs.getInt("id"));
+				escudero.setNombre(rs.getString("nombre"));
+				escudero.setExp(rs.getInt("exp"));
+				escudero.setFortaleza(rs.getDouble("fortaleza"));
+				escudero.setCaballero(getCaballero(rs.getInt("id_caballero")));
+			
+				return escudero;
+			}	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
 	}
 	
 	public Caballero getCaballero(int idCaballero) {
@@ -320,6 +381,25 @@ public class GestorBBDD extends Conector{
 		
 	}
 	
+	public void insertarEscuderos(Escudero escudero) {
+		
+		String sql = "INSERT INTO escuderos (Nombre,exp,fortaleza,id_caballero) VALUES (?,?,?,?)";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, escudero.getNombre());
+			pst.setInt(2, escudero.getExp());
+			pst.setDouble(3, escudero.getExp());
+			pst.setInt(4, escudero.getCaballero().getId());
+			
+			pst.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void eliminarCaballero(int idCaballero) {
 		
 		String sql ="DELETE FROM caballero WHERE id = ?";
@@ -406,6 +486,21 @@ public class GestorBBDD extends Conector{
 		}
 	}
 	
+	public void eliminarEscudero(int idEscudero) {
+		
+		String sql = "DELETE FROM escuderos WHERE id = ?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, idEscudero);
+			
+			pst.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void modificarCaballero(Caballero caballero, int idCaballero) {
 		
 		String sql ="UPDATE caballero SET nombre = ?, exp = ?, fuerza=?, destreza=?, id_arma=?,id_escudo=? WHERE id = ?";
@@ -474,6 +569,25 @@ public class GestorBBDD extends Conector{
 			pst.setDouble(3, caballo.getResistencia());
 			pst.setInt(4, caballo.getCaballero().getId());
 			pst.setInt(5, idCaballo);
+			
+			pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void modificarEscuderos(Escudero escudero, int idEscudero) {
+		
+		String sql = "UPDATE escuderos SET nombre=?, exp=?,fortaleza=?,id_caballero=? WHERE id=?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, escudero.getNombre());
+			pst.setDouble(2, escudero.getExp());
+			pst.setDouble(3, escudero.getFortaleza());
+			pst.setInt(4, escudero.getCaballero().getId());
+			pst.setInt(5, idEscudero);
 			
 			pst.executeUpdate();
 			
