@@ -82,6 +82,29 @@ public class Formulario {
 		
 	}
 	
+	public static Caballo introducirDatosCaballo() {
+		
+		Caballo caballo = new Caballo();
+		GestorBBDD gestorBBDD = new GestorBBDD();
+		
+		System.out.println("Introduce el nombre del caballo");
+		caballo.setNombre(scan.nextLine());
+		
+		System.out.println("Introduce la velocidad maxima del caballo");
+		caballo.setvMax(Double.parseDouble(scan.nextLine()));
+		
+		System.out.println("Introduce la resistencia del caballo");
+		caballo.setResistencia(Double.parseDouble(scan.nextLine()));
+		
+		//Caballeros
+		Visor.visualizarCaballeros(gestorBBDD.getCaballeros());
+		
+		caballo.setCaballero(gestorBBDD.getCaballero(introducirIdCaballero()));
+		
+		return caballo;
+		
+	}
+	
 	public static int introducirIdArma() {
 		System.out.println("Introduce el id del arma que quieres");
 		return Integer.parseInt(scan.nextLine());
@@ -105,6 +128,11 @@ public class Formulario {
 		lucha.setPerdedor(gestorBBDD.getCaballero(introducirIdCaballero()));
 		
 		return lucha;
+	}
+	
+	public static int introducirIdCaballo() {
+		System.out.println("Introduce el id del caballo que quieres");
+		return Integer.parseInt(scan.nextLine());
 	}
 
 	public static String yesOrNo() {
