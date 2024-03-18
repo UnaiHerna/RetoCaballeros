@@ -57,6 +57,10 @@ public class ControladorCaballos {
 				
 				break;
 				
+			case Menu.SALIR:
+				
+				System.out.println("Saliendo del menu de caballos");
+				break;
 				
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + opcion);
