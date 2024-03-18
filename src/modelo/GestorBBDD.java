@@ -157,6 +157,65 @@ public class GestorBBDD extends Conector{
 		
 	}
 	
+	public ArrayList<Caballo> getCaballos(){
+		
+		ArrayList<Caballo> caballos = new ArrayList<Caballo>();
+		
+		String sql = "SELECT * FROM caballos";
+		
+		try {
+			Statement st = cn.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			
+			while(rs.next()) {
+				Caballo caballo = new Caballo();
+				caballo.setId(rs.getInt("id"));
+				caballo.setNombre(rs.getString("Nombre"));
+				caballo.setvMax(rs.getDouble("vMAx"));
+				caballo.setResistencia(rs.getDouble("resistencia"));
+				caballo.setCaballero(getCaballero(rs.getInt("id_caballero")));
+				
+				caballos.add(caballo);
+				
+			}
+			
+			return caballos;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public Caballo getCaballo( int idCaballo){
+		
+		String sql = "SELECT * FROM caballos WHERE id_caballero = ?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, idCaballo);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				Caballo caballo = new Caballo();
+				caballo.setId(rs.getInt("id"));
+				caballo.setNombre(rs.getString("Nombre"));
+				caballo.setvMax(rs.getDouble("vMAx"));
+				caballo.setResistencia(rs.getDouble("resistencia"));
+				caballo.setCaballero(getCaballero(rs.getInt("id_caballero")));
+				
+				return caballo;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	public Caballero getCaballero(int idCaballero) {
 		
 		String sql ="SELECT * FROM caballero WHERE id=?";
@@ -242,6 +301,25 @@ public class GestorBBDD extends Conector{
 		
 	}
 	
+	public void insertarCaballos(Caballo caballo) {
+		
+		String sql = "INSERT INTO caballos (Nombre,vMax,resistencia,id_caballero) VALUES (?,?,?,?)";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, caballo.getNombre());
+			pst.setDouble(2, caballo.getvMax());
+			pst.setDouble(3, caballo.getResistencia());
+			pst.setInt(4, caballo.getCaballero().getId());
+			
+			pst.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void eliminarCaballero(int idCaballero) {
 		
 		String sql ="DELETE FROM caballero WHERE id = ?";
@@ -313,6 +391,21 @@ public class GestorBBDD extends Conector{
 		
 	}
 	
+	public void eliminarCaballo(int idCaballo) {
+		
+		String sql = "DELETE FROM caballos WHERE id = ?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, idCaballo);
+			
+			pst.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void modificarCaballero(Caballero caballero, int idCaballero) {
 		
 		String sql ="UPDATE caballero SET nombre = ?, exp = ?, fuerza=?, destreza=?, id_arma=?,id_escudo=? WHERE id = ?";
@@ -365,6 +458,25 @@ public class GestorBBDD extends Conector{
 			
 			pst.executeUpdate();
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void modificarCaballos(Caballo caballo, int idCaballo) {
+		
+		String sql = "UPDATE caballos SET nombre=?, vMax=?,resistencia=?,id_caballero=? WHERE id=?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, caballo.getNombre());
+			pst.setDouble(2, caballo.getvMax());
+			pst.setDouble(3, caballo.getResistencia());
+			pst.setInt(4, caballo.getCaballero().getId());
+			pst.setInt(5, idCaballo);
+			
+			pst.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -43,6 +43,11 @@ public class ControladorApp {
 				
 				ControladorLuchas.run();
 				break;
+				
+			case Menu.CABALLOS:
+				
+				ControladorCaballos.run();
+				break;
 
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + opcion);
