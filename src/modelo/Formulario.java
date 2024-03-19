@@ -116,6 +116,22 @@ public class Formulario {
 		
 	}
 	
+public static Escudero introducirDatosEscuderoSinExp() {
+		
+		Escudero escudero = new Escudero();
+		
+		System.out.println("Introduce el nombre del escudero");
+		escudero.setNombre(scan.nextLine());
+
+		escudero.setExp(1);
+		
+		System.out.println("Introduce la fortaleza del escudero");
+		escudero.setFortaleza(Double.parseDouble(scan.nextLine()));
+			
+		return escudero;
+		
+	}
+	
 	public static int introducirIdArma() {
 		System.out.println("Introduce el id del arma que quieres");
 		return Integer.parseInt(scan.nextLine());

@@ -104,16 +104,17 @@ public class Caballero {
 		if(escudero == null) {
 			setEscudero(new Escudero(0, "", 0, 0)); 
 		}
-		return (fuerza+destreza*2+arma.getDaño()+caballo.getvMax())-(arma.getPeso()+escudo.getPeso());
+		return (fuerza+destreza*3+arma.getDaño()+caballo.getvMax())-(arma.getPeso()+escudo.getPeso());
 	}
 	
 	public double getDefensa() {
-		return fuerza+escudo.getDefensa()/2+caballo.getResistencia()+escudero.getFortaleza();
+		return fuerza+(escudo.getDefensa()/2)+caballo.getResistencia()+escudero.getFortaleza();
 	}
 	
 	public double getFuerzaDeLucha() {
 		Random randomizador = new Random();
 		double numAleatorio = randomizador.nextDouble(1)/10;
+		System.out.println(numAleatorio);
 		return (getAtaque()-getDefensa())*(numAleatorio*exp);
 	}
 	

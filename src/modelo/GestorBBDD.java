@@ -93,7 +93,7 @@ public class GestorBBDD extends Conector{
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un escudo con esa id");
 		}
 		
 		return null;
@@ -152,7 +152,7 @@ public class GestorBBDD extends Conector{
 			}	
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un arma con esa id");
 		}
 		
 		return null;
@@ -211,7 +211,7 @@ public class GestorBBDD extends Conector{
 			}	
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un caballo con esa id");
 		}
 		
 		return null;
@@ -269,7 +269,7 @@ public class GestorBBDD extends Conector{
 			}	
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un escudero con esa id");
 		}
 		
 		return null;
@@ -301,7 +301,7 @@ public class GestorBBDD extends Conector{
 			}	
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un caballero con esa id");
 		}
 		
 		return null;
@@ -437,7 +437,7 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado una lucha asociada a esa id");
 		}
 		System.out.println("Lo ha hecho correctamente");
 	}
@@ -483,7 +483,7 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un caballo con esa id");
 		}
 	}
 	
@@ -498,7 +498,7 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un escudero con esa id");
 		}
 	}
 	
@@ -519,7 +519,7 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un caballero con esa id");
 		}
 	}
 	
@@ -537,7 +537,7 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
       
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un escudo con esa id");
 		}
 	}
 	
@@ -555,7 +555,7 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un arma con esa id");
 		}
 	}
 	
@@ -573,7 +573,7 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un caballo con esa id");
 		}
 	}
 	
@@ -591,7 +591,7 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un escudero con esa id");
 		}
 	}
 
@@ -651,7 +651,7 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado una lucha con esa id");
 		}
 		
 	}
@@ -669,7 +669,7 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado una lucha con esa id");
 		}
 	}
 
@@ -693,7 +693,7 @@ public class GestorBBDD extends Conector{
 			}	
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado una lucha con esa id");
 		}
 		
 		return null;
@@ -718,7 +718,7 @@ public class GestorBBDD extends Conector{
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un caballo con esa id");
 		}
 		
 		return null;
@@ -743,7 +743,7 @@ public class GestorBBDD extends Conector{
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un escudero con esa id");
 		}
 		
 		return null;

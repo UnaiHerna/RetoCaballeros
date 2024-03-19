@@ -56,34 +56,46 @@ public class Lucha {
 	}
 	
 	public void comienzoLucha() {
+		//Ganador y perdedor son nombres temporales, realmente luego se van a reasignar.
 		
-		//Decide el ganador de la lucha, ganador y perdedor tienen esos nombres, pero es temporal
-		if(perdedor.getFuerzaDeLucha()>=ganador.getFuerzaDeLucha()) {
-			Caballero cabAuxiliar = ganador;
-			this.setGanador(perdedor);
-			this.setPerdedor(cabAuxiliar);
+		//Si no tienen escudero, porcentaje para crearlo
+		if(ganador.getEscudero()==null){
+			porcentajeCrearEscudero(ganador);
+		}
+		if(perdedor.getEscudero()==null){
+			porcentajeCrearEscudero(perdedor);
 		}
 		
-		System.out.println("El ganador es...");
-		System.out.println("¡¡¡"+this.ganador.getNombre()+"!!!");
+		//Decide el ganador de la lucha
+		if(perdedor.getFuerzaDeLucha()>=ganador.getFuerzaDeLucha()) {
+			Caballero cabAuxiliar = ganador;
+			setGanador(perdedor);
+			setPerdedor(cabAuxiliar);
+		}
+		
+		//Otorga experiencia de combate al ganador
+		ganador.setExp(ganador.getExp()+2);
 		
 		if(ganador.getEscudero()!=null){
 			//Posible subida de rango
 			ganador.getEscudero().setExp(ganador.getEscudero().getExp()+2);
 			subidaRango(ganador.getEscudero());
-		}else {
-			// Crear un objeto de la clase Random
-	        Random rand = new Random();
-	        // Generar un número aleatorio en el rango del 1 al 5
-	        int numeroAleatorio = rand.nextInt(5) + 1;
-	        
-	        if (numeroAleatorio==1) {
-	        	GestorBBDD gestorBBDD = new GestorBBDD();
-	        	Escudero escudero = Formulario.introducirDatosEscudero();
-				gestorBBDD.insertarEscuderos(escudero, ganador.getId());
-	        }
 		}
-		
+	}
+
+	public void porcentajeCrearEscudero(Caballero caballero) {
+		// Crear un objeto de la clase Random
+        Random rand = new Random();
+        // Generar un número aleatorio en el rango del 1 al 5
+        int numeroAleatorio = rand.nextInt(5) + 1;
+        
+        if (numeroAleatorio==1) {
+        	System.out.println("A "+caballero.getNombre()+" se le ha asignado un escudero nuevo");
+        	GestorBBDD gestorBBDD = new GestorBBDD();
+        	Escudero escudero = Formulario.introducirDatosEscuderoSinExp();
+        	caballero.setEscudero(escudero);
+			gestorBBDD.insertarEscuderos(escudero, caballero.getId());
+        }
 	}
 
 	public void subidaRango(Escudero escudero) {
