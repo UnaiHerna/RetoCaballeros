@@ -700,4 +700,55 @@ public class GestorBBDD extends Conector{
 		return null;
 	}
 	
+	public Caballo getCaballoXIdCaballero(int idCaballero) {
+		String sql = "SELECT * FROM caballos WHERE id_caballero = ?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, idCaballero);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				Caballo caballo = new Caballo();
+				caballo.setId(rs.getInt("id"));
+				caballo.setNombre(rs.getString("nombre"));
+				caballo.setvMax(rs.getDouble("vMax"));
+				caballo.setResistencia(rs.getDouble("resistencia"));
+				caballo.setCaballero(getCaballero(idCaballero));
+				
+				return caballo;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public Escudero getEscuderoXIdCaballero(int idCaballero) {
+		String sql = "SELECT * FROM escuderos WHERE id_caballero = ?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, idCaballero);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				Escudero escudero = new Escudero();
+				escudero.setId(rs.getInt("id"));
+				escudero.setNombre(rs.getString("nombre"));
+				escudero.setExp(rs.getInt("experiencia"));
+				escudero.setFortaleza(rs.getDouble("fortaleza"));
+				escudero.setCaballero(getCaballero(idCaballero));
+				
+				return escudero;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }
