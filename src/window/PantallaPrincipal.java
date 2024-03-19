@@ -1,11 +1,17 @@
 package window;
 
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import modelo.*;
@@ -13,6 +19,8 @@ import modelo.*;
 public class PantallaPrincipal {
 
 	private JFrame frmLuchaMedieval;
+	
+	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -48,15 +56,6 @@ public class PantallaPrincipal {
 	    frmLuchaMedieval.setSize(650, 575);
 	    frmLuchaMedieval.getContentPane().setLayout(null);
 	    
-	    JButton btnNewButton = new JButton("LUCHAR");
-	    btnNewButton.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		PantallaPelea pantallaPelea = new PantallaPelea();
-	    	}
-	    });
-	    btnNewButton.setBounds(270, 243, 108, 35);
-	    frmLuchaMedieval.getContentPane().add(btnNewButton);
-	    
 	    // Crear un JLabel para la imagen de fondo
 	    JLabel backgroundLabel = new JLabel();
 	    backgroundLabel.setBounds(0, 0, 634, 536);
@@ -64,7 +63,38 @@ public class PantallaPrincipal {
 	    	    
 	    // Agregar el JLabel al JFrame
 	    frmLuchaMedieval.getContentPane().add(backgroundLabel);
-
 	    
+	    //Boton y funcionalidad
+	    JButton btnNewButton = new JButton("LUCHAR");
+	    btnNewButton.setBounds(270, 243, 108, 35);
+	    frmLuchaMedieval.getContentPane().add(btnNewButton);
+	    btnNewButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		btnNewButton.setVisible(false);
+	    		backgroundLabel.setVisible(false);
+	    		selectorPersonajes();
+			}
+	    });
+	    
+	}
+	
+	private void selectorPersonajes() {
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		GestorBBDD gestorBBDD = new GestorBBDD();	
+		
+		ArrayList<Caballero> caballeros = gestorBBDD.getCaballeros();
+		
+			for (Caballero caballero : caballeros) {
+				
+				JButton btnNewButton = new JButton(caballero.getNombre());
+				contentPane.add(btnNewButton);
+			} 
+			
+	    contentPane.revalidate();
+		contentPane.repaint();
+
+		contentPane.setVisible(true);
 	}
 }
