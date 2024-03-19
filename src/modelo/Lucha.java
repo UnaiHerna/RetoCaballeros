@@ -1,7 +1,6 @@
 package modelo;
 
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 import vista.Visor;
 
@@ -68,9 +67,23 @@ public class Lucha {
 		System.out.println("El ganador es...");
 		System.out.println("¡¡¡"+this.ganador.getNombre()+"!!!");
 		
-		//Posible subida de rango
-		ganador.getEscudero().setExp(ganador.getEscudero().getExp()+2);
-		subidaRango(ganador.getEscudero());
+		if(ganador.getEscudero()!=null){
+			//Posible subida de rango
+			ganador.getEscudero().setExp(ganador.getEscudero().getExp()+2);
+			subidaRango(ganador.getEscudero());
+		}else {
+			// Crear un objeto de la clase Random
+	        Random rand = new Random();
+	        // Generar un número aleatorio en el rango del 1 al 5
+	        int numeroAleatorio = rand.nextInt(5) + 1;
+	        
+	        if (numeroAleatorio==1) {
+	        	GestorBBDD gestorBBDD = new GestorBBDD();
+	        	Escudero escudero = Formulario.introducirDatosEscudero();
+				gestorBBDD.insertarEscuderos(escudero, ganador.getId());
+	        }
+		}
+		
 	}
 
 	public void subidaRango(Escudero escudero) {

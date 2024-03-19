@@ -426,7 +426,7 @@ public class GestorBBDD extends Conector{
 		}
 	}
 	
-	private void eliminarLuchaXIDParticipante(int idCaballero) {
+	public void eliminarLuchaXIDParticipante(int idCaballero) {
 		String sql = "DELETE FROM luchas WHERE id_ganador = ? OR id_perdedor = ?";
 		
 		try {
