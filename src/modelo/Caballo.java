@@ -5,16 +5,14 @@ public class Caballo {
 	private String nombre;
 	private double vMax;
 	private double resistencia;
-	private Caballero caballero;
 	
 	public Caballo() {}
 	
-	public Caballo(int id, String nombre, double vMax, double resistencia, Caballero caballero) {
+	public Caballo(int id, String nombre, double vMax, double resistencia) {
 		this.id = id;
 		this.nombre = nombre;
 		this.vMax = vMax;
 		this.resistencia = resistencia;
-		this.caballero = caballero;
 	}
 
 	public int getId() {
@@ -49,18 +47,9 @@ public class Caballo {
 		this.resistencia = resistencia;
 	}
 
-	public Caballero getCaballero() {
-		return caballero;
-	}
-
-	public void setCaballero(Caballero caballero) {
-		this.caballero = caballero;
-	}
-
 	@Override
 	public String toString() {
-		return id + "."+ nombre + ", Velocidad Maxima= " + vMax + ", Resistencia= " + resistencia
-				+ ", Caballero: " + caballero.getNombre();
+		return id + "."+ nombre + ", Velocidad Maxima= " + vMax + ", Resistencia= " + resistencia;
 	}
 	
 }

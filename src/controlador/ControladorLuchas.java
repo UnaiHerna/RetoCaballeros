@@ -38,7 +38,7 @@ public class ControladorLuchas {
 					
 					Lucha lucha = Formulario.introducirDatosLucha();
 					//Se llaman ganador y perdedor pero se decide en comienzo lucha quien será
-					lucha.comienzoLucha(lucha.getGanador(), lucha.getPerdedor()); 
+					lucha.comienzoLucha(); 
 					gestorBBDD.insertarLucha(lucha);
 					
 					System.out.println("El ganador es...");
@@ -63,11 +63,8 @@ public class ControladorLuchas {
 					
 					idLucha = Formulario.introducirIdLucha();
 					lucha = Formulario.introducirDatosLucha();
-					lucha.comienzoLucha(lucha.getGanador(), lucha.getPerdedor());
+					lucha.comienzoLucha();
 					gestorBBDD.modificarLucha(lucha, idLucha);
-					
-					System.out.println("El ganador es...");
-					System.out.println("¡¡¡"+lucha.getGanador().getNombre()+"!!!");
 					break;
 
 				default:

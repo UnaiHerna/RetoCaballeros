@@ -85,7 +85,6 @@ public class Formulario {
 	public static Caballo introducirDatosCaballo() {
 		
 		Caballo caballo = new Caballo();
-		GestorBBDD gestorBBDD = new GestorBBDD();
 		
 		System.out.println("Introduce el nombre del caballo");
 		caballo.setNombre(scan.nextLine());
@@ -95,12 +94,7 @@ public class Formulario {
 		
 		System.out.println("Introduce la resistencia del caballo");
 		caballo.setResistencia(Double.parseDouble(scan.nextLine()));
-		
-		//Caballeros
-		Visor.visualizarCaballeros(gestorBBDD.getCaballeros());
-		
-		caballo.setCaballero(gestorBBDD.getCaballero(introducirIdCaballero()));
-		
+
 		return caballo;
 		
 	}
@@ -108,7 +102,6 @@ public class Formulario {
 	public static Escudero introducirDatosEscudero() {
 		
 		Escudero escudero = new Escudero();
-		GestorBBDD gestorBBDD = new GestorBBDD();
 		
 		System.out.println("Introduce el nombre del escudero");
 		escudero.setNombre(scan.nextLine());
@@ -118,10 +111,23 @@ public class Formulario {
 		
 		System.out.println("Introduce la fortaleza del escudero");
 		escudero.setFortaleza(Double.parseDouble(scan.nextLine()));
+			
+		return escudero;
 		
-		Visor.visualizarCaballeros(gestorBBDD.getCaballeros());
-		escudero.setCaballero(gestorBBDD.getCaballero(Formulario.introducirIdCaballero()));
+	}
+	
+public static Escudero introducirDatosEscuderoSinExp() {
 		
+		Escudero escudero = new Escudero();
+		
+		System.out.println("Introduce el nombre del escudero");
+		escudero.setNombre(scan.nextLine());
+
+		escudero.setExp(1);
+		
+		System.out.println("Introduce la fortaleza del escudero");
+		escudero.setFortaleza(Double.parseDouble(scan.nextLine()));
+			
 		return escudero;
 		
 	}

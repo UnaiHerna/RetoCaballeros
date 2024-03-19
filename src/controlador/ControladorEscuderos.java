@@ -3,10 +3,7 @@ package controlador;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import modelo.Escudero;
-import modelo.Formulario;
-import modelo.GestorBBDD;
-import modelo.Menu;
+import modelo.*;
 import vista.Visor;
 
 public class ControladorEscuderos {
@@ -16,7 +13,7 @@ public class ControladorEscuderos {
 	public static void run() {
 	
 		GestorBBDD gestorBBDD = new GestorBBDD();
-		int opcion = Integer.parseInt(scan.nextLine());
+		int opcion;
 		
 		do {
 			
@@ -33,7 +30,11 @@ public class ControladorEscuderos {
 			case Menu.INSERTAR_ESCUDEROS:
 				
 				Escudero escudero = Formulario.introducirDatosEscudero();
-				gestorBBDD.insertarEscuderos(escudero);
+				ArrayList<Caballero> caballeros = gestorBBDD.getCaballeros();
+				Visor.visualizarCaballeros(caballeros);
+				
+				int idCaballero = Formulario.introducirIdCaballero();
+				gestorBBDD.insertarEscuderos(escudero, idCaballero);
 				break;
 			
 			case Menu.ELIMINAR_ESCUDEROS:

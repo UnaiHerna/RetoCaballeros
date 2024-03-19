@@ -5,16 +5,14 @@ public class Escudero {
 	private String nombre;
 	private int exp;
 	private double fortaleza;
-	private Caballero caballero;
 	
 	public Escudero() {}
 	
-	public Escudero(int id, String nombre, int exp, double fortaleza, Caballero caballero) {
+	public Escudero(int id, String nombre, int exp, double fortaleza) {
 		this.id = id;
 		this.nombre = nombre;
 		this.exp = exp;
 		this.fortaleza = fortaleza;
-		this.caballero = caballero;
 	}
 
 	public int getId() {
@@ -49,18 +47,9 @@ public class Escudero {
 		this.fortaleza = fortaleza;
 	}
 
-	public Caballero getCaballero() {
-		return caballero;
-	}
-
-	public void setCaballero(Caballero caballero) {
-		this.caballero = caballero;
-	}
-
 	@Override
 	public String toString() {
-		return id + "."+ nombre + ", Experiencia= " + exp + ", Fortaleza= " + fortaleza
-				+ ", Caballero: " + caballero.getNombre();
+		return id + "."+ nombre + ", Experiencia= " + exp + ", Fortaleza= " + fortaleza;
 	}
 	
 }

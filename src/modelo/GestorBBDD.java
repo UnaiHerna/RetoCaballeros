@@ -29,6 +29,8 @@ public class GestorBBDD extends Conector{
 				caballero.setDestreza(rs.getInt("destreza"));
 				caballero.setArma(getArma(rs.getInt("id_arma")));
 				caballero.setEscudo(getEscudo(rs.getInt("id_escudo")));
+				caballero.setCaballo(getCaballoXIdCaballero(caballero.getId()));
+				caballero.setEscudero(getEscuderoXIdCaballero(caballero.getId()));
 				
 				caballeros.add(caballero);
 			}
@@ -91,7 +93,7 @@ public class GestorBBDD extends Conector{
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un escudo con esa id");
 		}
 		
 		return null;
@@ -150,7 +152,7 @@ public class GestorBBDD extends Conector{
 			}	
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un arma con esa id");
 		}
 		
 		return null;
@@ -173,7 +175,6 @@ public class GestorBBDD extends Conector{
 				caballo.setNombre(rs.getString("Nombre"));
 				caballo.setvMax(rs.getDouble("vMAx"));
 				caballo.setResistencia(rs.getDouble("resistencia"));
-				caballo.setCaballero(getCaballero(rs.getInt("id_caballero")));
 				
 				caballos.add(caballo);
 				
@@ -204,13 +205,13 @@ public class GestorBBDD extends Conector{
 				caballo.setNombre(rs.getString("nombre"));
 				caballo.setvMax(rs.getDouble("vMax"));
 				caballo.setResistencia(rs.getDouble("resistencia"));
-				caballo.setCaballero(getCaballero(rs.getInt("id_caballero")));
+
 			
 				return caballo;
 			}	
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un caballo con esa id");
 		}
 		
 		return null;
@@ -231,9 +232,8 @@ public class GestorBBDD extends Conector{
 				Escudero escudero = new Escudero();
 				escudero.setId(rs.getInt("id"));
 				escudero.setNombre(rs.getString("nombre"));
-				escudero.setExp(rs.getInt("exp"));
+				escudero.setExp(rs.getInt("experiencia"));
 				escudero.setFortaleza(rs.getDouble("fortaleza"));
-				escudero.setCaballero(getCaballero(rs.getInt("id_caballero")));
 				
 				escuderos.add(escudero);
 			}
@@ -262,15 +262,14 @@ public class GestorBBDD extends Conector{
 				Escudero escudero = new Escudero();
 				escudero.setId(rs.getInt("id"));
 				escudero.setNombre(rs.getString("nombre"));
-				escudero.setExp(rs.getInt("exp"));
+				escudero.setExp(rs.getInt("experiencia"));
 				escudero.setFortaleza(rs.getDouble("fortaleza"));
-				escudero.setCaballero(getCaballero(rs.getInt("id_caballero")));
 			
 				return escudero;
 			}	
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un escudero con esa id");
 		}
 		
 		return null;
@@ -296,11 +295,13 @@ public class GestorBBDD extends Conector{
 				caballero.setDestreza(rs.getInt("fuerza"));
 				caballero.setArma(getArma(rs.getInt("id_arma")));
 				caballero.setEscudo(getEscudo(rs.getInt("id_escudo")));
+				caballero.setCaballo(getCaballoXIdCaballero(caballero.getId()));
+				caballero.setEscudero(getEscuderoXIdCaballero(caballero.getId()));
 				return caballero;
 			}	
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un caballero con esa id");
 		}
 		
 		return null;
@@ -362,7 +363,7 @@ public class GestorBBDD extends Conector{
 		
 	}
 	
-	public void insertarCaballos(Caballo caballo) {
+	public void insertarCaballos(Caballo caballo, int idCaballero) {
 		
 		String sql = "INSERT INTO caballos (Nombre,vMax,resistencia,id_caballero) VALUES (?,?,?,?)";
 		
@@ -371,7 +372,7 @@ public class GestorBBDD extends Conector{
 			pst.setString(1, caballo.getNombre());
 			pst.setDouble(2, caballo.getvMax());
 			pst.setDouble(3, caballo.getResistencia());
-			pst.setInt(4, caballo.getCaballero().getId());
+			pst.setInt(4, idCaballero);
 			
 			pst.execute();
 			
@@ -381,16 +382,16 @@ public class GestorBBDD extends Conector{
 		
 	}
 	
-	public void insertarEscuderos(Escudero escudero) {
+	public void insertarEscuderos(Escudero escudero, int idEscudero) {
 		
-		String sql = "INSERT INTO escuderos (Nombre,exp,fortaleza,id_caballero) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO escuderos (Nombre,experiencia,fortaleza,id_caballero) VALUES (?,?,?,?)";
 		
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setString(1, escudero.getNombre());
 			pst.setInt(2, escudero.getExp());
-			pst.setDouble(3, escudero.getExp());
-			pst.setInt(4, escudero.getCaballero().getId());
+			pst.setDouble(3, escudero.getFortaleza());
+			pst.setInt(4, idEscudero);
 			
 			pst.execute();
 			
@@ -425,7 +426,7 @@ public class GestorBBDD extends Conector{
 		}
 	}
 	
-	private void eliminarLuchaXIDParticipante(int idCaballero) {
+	public void eliminarLuchaXIDParticipante(int idCaballero) {
 		String sql = "DELETE FROM luchas WHERE id_ganador = ? OR id_perdedor = ?";
 		
 		try {
@@ -436,7 +437,7 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado una lucha asociada a esa id");
 		}
 		System.out.println("Lo ha hecho correctamente");
 	}
@@ -482,7 +483,7 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un caballo con esa id");
 		}
 	}
 	
@@ -497,7 +498,7 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un escudero con esa id");
 		}
 	}
 	
@@ -518,7 +519,7 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un caballero con esa id");
 		}
 	}
 	
@@ -536,7 +537,7 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
       
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un escudo con esa id");
 		}
 	}
 	
@@ -554,45 +555,43 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un arma con esa id");
 		}
 	}
 	
 	public void modificarCaballos(Caballo caballo, int idCaballo) {
 		
-		String sql = "UPDATE caballos SET nombre=?, vMax=?,resistencia=?,id_caballero=? WHERE id=?";
+		String sql = "UPDATE caballos SET nombre=?, vMax=?,resistencia=? WHERE id=?";
 		
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setString(1, caballo.getNombre());
 			pst.setDouble(2, caballo.getvMax());
 			pst.setDouble(3, caballo.getResistencia());
-			pst.setInt(4, caballo.getCaballero().getId());
-			pst.setInt(5, idCaballo);
+			pst.setInt(4, idCaballo);
 			
 			pst.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un caballo con esa id");
 		}
 	}
 	
 	public void modificarEscuderos(Escudero escudero, int idEscudero) {
 		
-		String sql = "UPDATE escuderos SET nombre=?, exp=?,fortaleza=?,id_caballero=? WHERE id=?";
+		String sql = "UPDATE escuderos SET nombre=?, experiencia=?,fortaleza=? WHERE id=?";
 		
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setString(1, escudero.getNombre());
 			pst.setDouble(2, escudero.getExp());
 			pst.setDouble(3, escudero.getFortaleza());
-			pst.setInt(4, escudero.getCaballero().getId());
-			pst.setInt(5, idEscudero);
+			pst.setInt(4, idEscudero);
 			
 			pst.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado un escudero con esa id");
 		}
 	}
 
@@ -652,7 +651,7 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado una lucha con esa id");
 		}
 		
 	}
@@ -670,7 +669,7 @@ public class GestorBBDD extends Conector{
 			pst.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado una lucha con esa id");
 		}
 	}
 
@@ -694,10 +693,59 @@ public class GestorBBDD extends Conector{
 			}	
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No se ha encontrado una lucha con esa id");
 		}
 		
 		return null;
 	}
 	
+	public Caballo getCaballoXIdCaballero(int idCaballero) {
+		String sql = "SELECT * FROM caballos WHERE id_caballero = ?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, idCaballero);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				Caballo caballo = new Caballo();
+				caballo.setId(rs.getInt("id"));
+				caballo.setNombre(rs.getString("nombre"));
+				caballo.setvMax(rs.getDouble("vMax"));
+				caballo.setResistencia(rs.getDouble("resistencia"));
+				
+				return caballo;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("No se ha encontrado un caballo con esa id");
+		}
+		
+		return null;
+	}
+	
+	public Escudero getEscuderoXIdCaballero(int idCaballero) {
+		String sql = "SELECT * FROM escuderos WHERE id_caballero = ?";
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, idCaballero);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				Escudero escudero = new Escudero();
+				escudero.setId(rs.getInt("id"));
+				escudero.setNombre(rs.getString("nombre"));
+				escudero.setExp(rs.getInt("experiencia"));
+				escudero.setFortaleza(rs.getDouble("fortaleza"));
+				
+				return escudero;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("No se ha encontrado un escudero con esa id");
+		}
+		
+		return null;
+	}
 }
