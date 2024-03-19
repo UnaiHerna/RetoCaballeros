@@ -3,6 +3,7 @@ package controlador;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import modelo.Caballero;
 import modelo.Caballo;
 import modelo.Formulario;
 import modelo.GestorBBDD;
@@ -31,10 +32,13 @@ public class ControladorCaballos {
 				Visor.visualizarCaballos(caballos);
 				break;
 			
-			case Menu.INSERTAR_CABALLOS:
-				
+			case Menu.INSERTAR_CABALLOS:			
 				Caballo caballo = Formulario.introducirDatosCaballo();
-				gestorBBDD.insertarCaballos(caballo);
+				ArrayList<Caballero> caballeros = gestorBBDD.getCaballeros();
+				Visor.visualizarCaballeros(caballeros);
+				
+				int idCaballero = Formulario.introducirIdCaballero();
+				gestorBBDD.insertarCaballos(caballo, idCaballero);
 				break;
 				
 			case Menu.ELIMINAR_CABALLOS:

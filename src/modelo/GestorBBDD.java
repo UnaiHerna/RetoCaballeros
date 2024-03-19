@@ -29,6 +29,8 @@ public class GestorBBDD extends Conector{
 				caballero.setDestreza(rs.getInt("destreza"));
 				caballero.setArma(getArma(rs.getInt("id_arma")));
 				caballero.setEscudo(getEscudo(rs.getInt("id_escudo")));
+				caballero.setCaballo(getCaballoXIdCaballero(caballero.getId()));
+				caballero.setEscudero(getEscuderoXIdCaballero(caballero.getId()));
 				
 				caballeros.add(caballero);
 			}
@@ -173,7 +175,6 @@ public class GestorBBDD extends Conector{
 				caballo.setNombre(rs.getString("Nombre"));
 				caballo.setvMax(rs.getDouble("vMAx"));
 				caballo.setResistencia(rs.getDouble("resistencia"));
-				caballo.setCaballero(getCaballero(rs.getInt("id_caballero")));
 				
 				caballos.add(caballo);
 				
@@ -204,7 +205,7 @@ public class GestorBBDD extends Conector{
 				caballo.setNombre(rs.getString("nombre"));
 				caballo.setvMax(rs.getDouble("vMax"));
 				caballo.setResistencia(rs.getDouble("resistencia"));
-				caballo.setCaballero(getCaballero(rs.getInt("id_caballero")));
+
 			
 				return caballo;
 			}	
@@ -231,9 +232,8 @@ public class GestorBBDD extends Conector{
 				Escudero escudero = new Escudero();
 				escudero.setId(rs.getInt("id"));
 				escudero.setNombre(rs.getString("nombre"));
-				escudero.setExp(rs.getInt("exp"));
+				escudero.setExp(rs.getInt("experiencia"));
 				escudero.setFortaleza(rs.getDouble("fortaleza"));
-				escudero.setCaballero(getCaballero(rs.getInt("id_caballero")));
 				
 				escuderos.add(escudero);
 			}
@@ -262,9 +262,8 @@ public class GestorBBDD extends Conector{
 				Escudero escudero = new Escudero();
 				escudero.setId(rs.getInt("id"));
 				escudero.setNombre(rs.getString("nombre"));
-				escudero.setExp(rs.getInt("exp"));
+				escudero.setExp(rs.getInt("experiencia"));
 				escudero.setFortaleza(rs.getDouble("fortaleza"));
-				escudero.setCaballero(getCaballero(rs.getInt("id_caballero")));
 			
 				return escudero;
 			}	
@@ -296,6 +295,8 @@ public class GestorBBDD extends Conector{
 				caballero.setDestreza(rs.getInt("fuerza"));
 				caballero.setArma(getArma(rs.getInt("id_arma")));
 				caballero.setEscudo(getEscudo(rs.getInt("id_escudo")));
+				caballero.setCaballo(getCaballoXIdCaballero(caballero.getId()));
+				caballero.setEscudero(getEscuderoXIdCaballero(caballero.getId()));
 				return caballero;
 			}	
 			
@@ -362,7 +363,7 @@ public class GestorBBDD extends Conector{
 		
 	}
 	
-	public void insertarCaballos(Caballo caballo) {
+	public void insertarCaballos(Caballo caballo, int idCaballero) {
 		
 		String sql = "INSERT INTO caballos (Nombre,vMax,resistencia,id_caballero) VALUES (?,?,?,?)";
 		
@@ -371,7 +372,7 @@ public class GestorBBDD extends Conector{
 			pst.setString(1, caballo.getNombre());
 			pst.setDouble(2, caballo.getvMax());
 			pst.setDouble(3, caballo.getResistencia());
-			pst.setInt(4, caballo.getCaballero().getId());
+			pst.setInt(4, idCaballero);
 			
 			pst.execute();
 			
@@ -381,16 +382,16 @@ public class GestorBBDD extends Conector{
 		
 	}
 	
-	public void insertarEscuderos(Escudero escudero) {
+	public void insertarEscuderos(Escudero escudero, int idEscudero) {
 		
-		String sql = "INSERT INTO escuderos (Nombre,exp,fortaleza,id_caballero) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO escuderos (Nombre,experiencia,fortaleza,id_caballero) VALUES (?,?,?,?)";
 		
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setString(1, escudero.getNombre());
 			pst.setInt(2, escudero.getExp());
-			pst.setDouble(3, escudero.getExp());
-			pst.setInt(4, escudero.getCaballero().getId());
+			pst.setDouble(3, escudero.getFortaleza());
+			pst.setInt(4, idEscudero);
 			
 			pst.execute();
 			
@@ -560,15 +561,14 @@ public class GestorBBDD extends Conector{
 	
 	public void modificarCaballos(Caballo caballo, int idCaballo) {
 		
-		String sql = "UPDATE caballos SET nombre=?, vMax=?,resistencia=?,id_caballero=? WHERE id=?";
+		String sql = "UPDATE caballos SET nombre=?, vMax=?,resistencia=? WHERE id=?";
 		
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setString(1, caballo.getNombre());
 			pst.setDouble(2, caballo.getvMax());
 			pst.setDouble(3, caballo.getResistencia());
-			pst.setInt(4, caballo.getCaballero().getId());
-			pst.setInt(5, idCaballo);
+			pst.setInt(4, idCaballo);
 			
 			pst.executeUpdate();
 			
@@ -579,15 +579,14 @@ public class GestorBBDD extends Conector{
 	
 	public void modificarEscuderos(Escudero escudero, int idEscudero) {
 		
-		String sql = "UPDATE escuderos SET nombre=?, exp=?,fortaleza=?,id_caballero=? WHERE id=?";
+		String sql = "UPDATE escuderos SET nombre=?, experiencia=?,fortaleza=? WHERE id=?";
 		
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setString(1, escudero.getNombre());
 			pst.setDouble(2, escudero.getExp());
 			pst.setDouble(3, escudero.getFortaleza());
-			pst.setInt(4, escudero.getCaballero().getId());
-			pst.setInt(5, idEscudero);
+			pst.setInt(4, idEscudero);
 			
 			pst.executeUpdate();
 			
@@ -714,7 +713,6 @@ public class GestorBBDD extends Conector{
 				caballo.setNombre(rs.getString("nombre"));
 				caballo.setvMax(rs.getDouble("vMax"));
 				caballo.setResistencia(rs.getDouble("resistencia"));
-				caballo.setCaballero(getCaballero(idCaballero));
 				
 				return caballo;
 			}
@@ -740,7 +738,6 @@ public class GestorBBDD extends Conector{
 				escudero.setNombre(rs.getString("nombre"));
 				escudero.setExp(rs.getInt("experiencia"));
 				escudero.setFortaleza(rs.getDouble("fortaleza"));
-				escudero.setCaballero(getCaballero(idCaballero));
 				
 				return escudero;
 			}

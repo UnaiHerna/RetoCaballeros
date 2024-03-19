@@ -1,7 +1,9 @@
 package modelo;
 
 import java.util.Date;
-import java.util.Random;
+import java.util.Scanner;
+
+import vista.Visor;
 
 public class Lucha {
 	private int id;
@@ -54,43 +56,48 @@ public class Lucha {
 		return id + "." + " Fecha: " + fecha + ", Ganador: " + ganador.getNombre() + ", Perdedor: " + perdedor.getNombre();
 	}
 	
-	public void comienzoLucha(Caballero caballero1, Caballero caballero2) {
-		Random randomizador = new Random();
-		double numAleatorio = randomizador.nextDouble(1)/10;
-		double numAleatorio2 = randomizador.nextDouble(1)/10;
-		//System.out.println(numAleatorio);
-		//System.out.println(numAleatorio2);
+	public void comienzoLucha() {
 		
-		//Ataque y defensa Cab1
-		double ataqueCab1 = (caballero1.getFuerza()+caballero1.getDestreza()*2+caballero1.getArma().getDaño())-
-				caballero1.getArma().getPeso()+caballero1.getEscudo().getPeso();
-		//System.out.println(ataqueCab1);
+		//Decide el ganador de la lucha, ganador y perdedor tienen esos nombres, pero es temporal
+		if(perdedor.getFuerzaDeLucha()>=ganador.getFuerzaDeLucha()) {
+			Caballero cabAuxiliar = ganador;
+			this.setGanador(perdedor);
+			this.setPerdedor(cabAuxiliar);
+		}
 		
-		double defensaCab1 = (caballero1.getFuerza()+caballero1.getEscudo().getDefensa()/2);
-		//System.out.println(defensaCab1);
+		System.out.println("El ganador es...");
+		System.out.println("¡¡¡"+this.ganador.getNombre()+"!!!");
 		
-		//Ataque y defensa Cab2
-		double ataqueCab2 = (caballero2.getFuerza()+caballero2.getDestreza()*2+caballero2.getArma().getDaño())-
-				caballero2.getArma().getPeso()+caballero2.getEscudo().getPeso();
-		//System.out.println(ataqueCab2);
-		
-		double defensaCab2 = (caballero2.getFuerza()+caballero2.getEscudo().getDefensa()/2);
-		//System.out.println(defensaCab2);
-		
-		//Fuerza de lucha de los caballeros
-		double fuerzaDeLuchaCab1 = (ataqueCab1-defensaCab2)*(numAleatorio*caballero1.getExp());
-		//System.out.println("Fuerza lucha: "+fuerzaDeLuchaCab1);
-		
-		double fuerzaDeLuchaCab2 = (ataqueCab2-defensaCab1)*(numAleatorio2*caballero2.getExp());
-		//System.out.println("Fuerza lucha: "+fuerzaDeLuchaCab2);
-		
-		//Decide el ganador de la lucha
-		if(fuerzaDeLuchaCab1>=fuerzaDeLuchaCab2) {
-			this.setGanador(caballero1);
-			this.setPerdedor(caballero2);
+		//Posible subida de rango
+		ganador.getEscudero().setExp(ganador.getEscudero().getExp()+2);
+		subidaRango(ganador.getEscudero());
+	}
+
+	public void subidaRango(Escudero escudero) {
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		GestorBBDD gestorBBDD = new GestorBBDD();
+		if(escudero.getExp()>=10) {
+			Caballero caballero = new Caballero();
+			caballero.setNombre(escudero.getNombre());
+			caballero.setExp(1);
+			caballero.setDestreza(5);
+			caballero.setFuerza(5);
+				
+			Visor.visualizarArmas(gestorBBDD.getArmas());
+			System.out.println("\nEl escudero va a ascender a caballero, dime el id del arma que quieres que utilice");
+			caballero.setArma(gestorBBDD.getArma(Integer.parseInt(scanner.nextLine())));
+				
+				
+			Visor.visualizarEscudos(gestorBBDD.getEscudos());
+			System.out.println("\nDime el id del escudo que quieres que utilice");
+			caballero.setEscudo(gestorBBDD.getEscudo(Integer.parseInt(scanner.nextLine())));
+						
+			gestorBBDD.insertarCaballero(caballero);
+			gestorBBDD.eliminarEscudero(escudero.getId());
+			
 		}else {
-			this.setGanador(caballero2);
-			this.setPerdedor(caballero1);
+			gestorBBDD.modificarEscuderos(escudero, escudero.getId());
 		}
 		
 	}

@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Random;
+
 public class Caballero {
 	private int id;
 	private String nombre;
@@ -8,6 +10,8 @@ public class Caballero {
 	private int destreza;
 	private Arma arma;
 	private Escudo escudo;
+	private Caballo caballo;
+	private Escudero escudero;
 	
 	public Caballero() {}
 
@@ -76,11 +80,54 @@ public class Caballero {
 	public void setEscudo(Escudo escudo) {
 		this.escudo = escudo;
 	}
+	
+	public Caballo getCaballo() {
+		return caballo;
+	}
 
+	public void setCaballo(Caballo caballo) {
+		this.caballo = caballo;
+	}
+
+	public Escudero getEscudero() {
+		return escudero;
+	}
+
+	public void setEscudero(Escudero escudero) {
+		this.escudero = escudero;
+	}
+
+	public double getAtaque() {
+		if(caballo == null) {
+			setCaballo(new Caballo(0, "", 0, 0)); 
+		}
+		if(escudero == null) {
+			setEscudero(new Escudero(0, "", 0, 0)); 
+		}
+		return (fuerza+destreza*2+arma.getDaño()+caballo.getvMax())-(arma.getPeso()+escudo.getPeso());
+	}
+	
+	public double getDefensa() {
+		return fuerza+escudo.getDefensa()/2+caballo.getResistencia()+escudero.getFortaleza();
+	}
+	
+	public double getFuerzaDeLucha() {
+		Random randomizador = new Random();
+		double numAleatorio = randomizador.nextDouble(1)/10;
+		return (getAtaque()-getDefensa())*(numAleatorio*exp);
+	}
+	
 	@Override
 	public String toString() {
-		return id + "."+ nombre + ": Experencia= " + exp + ", Fuerza= " + fuerza + ", Destreza= "
+		String caballero = id + "."+ nombre + ": Experencia= " + exp + ", Fuerza= " + fuerza + ", Destreza= "
 				+ destreza + ", Arma: " + arma.getNombre() + ", Escudo: " + escudo.getNombre();
+		if(caballo != null) {
+			caballero = caballero + ", Caballo: " +caballo.getNombre();
+		}
+		if(escudero != null) {
+			caballero = caballero + ", Escudero: " +escudero.getNombre();
+		}
+		return caballero;
 	}
 
 	
