@@ -40,9 +40,6 @@ public class ControladorLuchas {
 					//Se llaman ganador y perdedor pero se decide en comienzo lucha quien será
 					lucha.comienzoLucha(); 
 					gestorBBDD.insertarLucha(lucha);
-					
-					System.out.println("El ganador es...");
-					System.out.println("¡¡¡"+lucha.getGanador().getNombre()+"!!!");
 					break;
 					
 				case Menu.ELIMINAR_LUCHA:

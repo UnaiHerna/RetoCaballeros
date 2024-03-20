@@ -73,6 +73,8 @@ public class Lucha {
 			setPerdedor(cabAuxiliar);
 		}
 		
+		System.out.println("El ganador es...");
+		System.out.println("¡¡¡"+ganador.getNombre()+"!!!\n");
 		//Otorga experiencia de combate al ganador
 		ganador.setExp(ganador.getExp()+2);
 		
@@ -109,8 +111,8 @@ public class Lucha {
 			caballero.setDestreza(5);
 			caballero.setFuerza(5);
 				
+			System.out.println("El escudero va a ascender a caballero, dime el id del arma que quieres que utilice\n");
 			Visor.visualizarArmas(gestorBBDD.getArmas());
-			System.out.println("\nEl escudero va a ascender a caballero, dime el id del arma que quieres que utilice");
 			caballero.setArma(gestorBBDD.getArma(Integer.parseInt(scanner.nextLine())));
 				
 				
