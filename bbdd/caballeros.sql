@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-03-2024 a las 14:20:50
+-- Tiempo de generación: 20-03-2024 a las 18:32:59
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -46,7 +46,7 @@ INSERT INTO `armas` (`id`, `nombre`, `daño`, `peso`) VALUES
 (5, 'Maza Estrella del alba', 100, 4),
 (6, 'Alabarda de Caballero Negro', 245, 14),
 (7, 'Ultra espadón del humo', 310, 25.5),
-(9, 'Gran garrote', 154, 16);
+(8, 'Gran garrote', 154, 16);
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,7 @@ INSERT INTO `armas` (`id`, `nombre`, `daño`, `peso`) VALUES
 CREATE TABLE `caballero` (
   `id` int(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
-  `exp` int(3) NOT NULL,
+  `exp` varchar(3) NOT NULL,
   `fuerza` int(11) NOT NULL,
   `destreza` int(11) NOT NULL,
   `id_arma` int(255) NOT NULL,
@@ -69,13 +69,14 @@ CREATE TABLE `caballero` (
 --
 
 INSERT INTO `caballero` (`id`, `nombre`, `exp`, `fuerza`, `destreza`, `id_arma`, `id_escudo`) VALUES
-(1, 'Siegmeyer de Catarina', 10, 20, 12, 2, 1),
-(2, 'Solaire de Astora', 8, 13, 15, 3, 5),
-(3, 'Havel la Roca', 15, 50, 2, 7, 3),
-(4, 'Príncipe Ricard', 5, 2, 35, 1, 4),
-(5, 'Yuria de Londor', 3, 10, 12, 6, 6),
-(6, 'El Irrompible Parches', 7, 13, 13, 6, 3),
-(7, 'Radahn el Azote de las Estrellas', 20, 45, 23, 7, 3);
+(1, 'Siegmeyer de Catarina', '10', 20, 12, 2, 1),
+(2, 'Solaire de Astora', '8', 13, 15, 3, 5),
+(3, 'Havel la Roca', '15', 50, 2, 7, 3),
+(4, 'Príncipe Ricard', '5', 2, 35, 1, 4),
+(5, 'Yuria de Londor', '4', 10, 12, 6, 5),
+(6, 'El Irrompible Parches', '7', 13, 13, 6, 3),
+(7, 'Radahn el Azote de las Estrellas', '20', 45, 23, 7, 3),
+(8, 'Malenia la Espada de Miquella', '20', 10, 40, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -121,9 +122,9 @@ CREATE TABLE `escuderos` (
 --
 
 INSERT INTO `escuderos` (`id`, `nombre`, `experiencia`, `fortaleza`, `id_caballero`) VALUES
-(1, 'Sancho Panza', 5, 60, 1),
-(2, 'Gilberto el marionetas', 1, 50, 6),
-(3, 'Bairon bufón real', 3, 35, 4);
+(1, 'Pugmanche el guardián', 1, 45, 2),
+(2, 'Gilberto el marionetas', 5, 50, 6),
+(3, 'Ronbai bufón real', 5, 35, 4);
 
 -- --------------------------------------------------------
 
@@ -169,9 +170,10 @@ CREATE TABLE `luchas` (
 
 INSERT INTO `luchas` (`id`, `fecha`, `id_ganador`, `id_perdedor`) VALUES
 (1, '2024-03-14', 1, 2),
-(9, '2024-03-15', 3, 2),
-(11, '2024-03-15', 7, 6),
-(16, '2024-03-18', 7, 3);
+(2, '2024-03-15', 3, 2),
+(3, '2024-03-15', 7, 6),
+(4, '2024-03-15', 2, 4),
+(5, '2024-03-18', 2, 1);
 
 --
 -- Índices para tablas volcadas
@@ -236,7 +238,7 @@ ALTER TABLE `armas`
 -- AUTO_INCREMENT de la tabla `caballero`
 --
 ALTER TABLE `caballero`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `caballos`
@@ -248,7 +250,7 @@ ALTER TABLE `caballos`
 -- AUTO_INCREMENT de la tabla `escuderos`
 --
 ALTER TABLE `escuderos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `escudos`
@@ -260,7 +262,7 @@ ALTER TABLE `escudos`
 -- AUTO_INCREMENT de la tabla `luchas`
 --
 ALTER TABLE `luchas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- Restricciones para tablas volcadas

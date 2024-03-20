@@ -10,6 +10,7 @@ public class Menu {
 	public final static int LUCHAS = 4;
 	public final static int CABALLOS = 5;
 	public final static int ESCUDEROS = 6;
+	public static final int JUEGO = 7;
 	
 	public final static int VER_CABALLEROS = 1;
 	public final static int INSERTAR_CABALLEROS = 2;
@@ -40,6 +41,8 @@ public class Menu {
 	public final static int INSERTAR_ESCUDEROS = 2;
 	public final static int ELIMINAR_ESCUDEROS = 3;
 	public final static int MODIFICAR_ESCUDEROS = 4;
+
+
 	
 	
 	public static void menuPrincipal() {
@@ -52,6 +55,7 @@ public class Menu {
 		System.out.println(LUCHAS + "- Entrar al menu de lucha");
 		System.out.println(CABALLOS + "- Entrar al menu de caballos");
 		System.out.println(ESCUDEROS + "- Entrar al menu de escuderos");
+		System.out.println(JUEGO + "- Entrar a la interfaz de peleas");
 	}
 	
 	public static void menuCaballeros() {

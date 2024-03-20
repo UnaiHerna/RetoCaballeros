@@ -3,6 +3,7 @@ package controlador;
 import java.util.Scanner;
 
 import modelo.Menu;
+import window.PantallaPrincipal;
 
 public class ControladorApp {
 	
@@ -52,6 +53,11 @@ public class ControladorApp {
 			case Menu.ESCUDEROS:
 				
 				ControladorEscuderos.run();
+				break;
+				
+			case Menu.JUEGO:
+				
+				PantallaPrincipal.main(null);
 				break;
 
 			default:

@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -49,9 +50,6 @@ public class PantallaPrincipal {
 	    JButton btnNewButton = new JButton("LUCHAR");
 	    btnNewButton.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-//	    		JOptionPane.showMessageDialog(frmLuchaMedieval, "Boton clikado");
-
-	    		//abrir JFrameSeleccionDeCaballeros()
 	    		JFrameSeleccionDeCaballeros selectorCaballeros = new JFrameSeleccionDeCaballeros();
 
 	    		selectorCaballeros.rellenarConBotones();
@@ -68,7 +66,6 @@ public class PantallaPrincipal {
 	    	    
 	    // Agregar el JLabel al JFrame
 	    frmLuchaMedieval.getContentPane().add(backgroundLabel);
-
-	    
+  
 	}
 }
