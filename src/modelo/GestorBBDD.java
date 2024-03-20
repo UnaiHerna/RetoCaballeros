@@ -382,7 +382,7 @@ public class GestorBBDD extends Conector{
 		
 	}
 	
-	public void insertarEscuderos(Escudero escudero, int idEscudero) {
+	public void insertarEscuderos(Escudero escudero, int idCaballero) {
 		
 		String sql = "INSERT INTO escuderos (Nombre,experiencia,fortaleza,id_caballero) VALUES (?,?,?,?)";
 		
@@ -391,7 +391,7 @@ public class GestorBBDD extends Conector{
 			pst.setString(1, escudero.getNombre());
 			pst.setInt(2, escudero.getExp());
 			pst.setDouble(3, escudero.getFortaleza());
-			pst.setInt(4, idEscudero);
+			pst.setInt(4, idCaballero);
 			
 			pst.execute();
 			

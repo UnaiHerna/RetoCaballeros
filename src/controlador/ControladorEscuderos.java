@@ -52,7 +52,7 @@ public class ControladorEscuderos {
 				Visor.visualizarEscuderos(escuderos);
 				
 				idEscudero = Formulario.introducirIdEscudero();
-				escudero = gestorBBDD.getEscudero(idEscudero);
+				escudero = Formulario.introducirDatosEscudero();	
 				gestorBBDD.modificarEscuderos(escudero, idEscudero);
 				break;
 			
