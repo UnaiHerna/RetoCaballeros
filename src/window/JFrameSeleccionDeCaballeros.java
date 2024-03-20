@@ -1,12 +1,11 @@
 package window;
 
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,15 +14,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 
 import modelo.Caballero;
 import modelo.GestorBBDD;
+import modelo.Lucha;
 
 public class JFrameSeleccionDeCaballeros extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JPanel botonPane;
+	private ArrayList<Caballero> caballerosPelea = new ArrayList<Caballero>();
 
 	/**
 	 * Launch the application.
@@ -52,15 +53,13 @@ public class JFrameSeleccionDeCaballeros extends JFrame {
 	public void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setSize(650, 575);
 
 		setContentPane(contentPane);
+		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel personaje1 = new JLabel();
-		personaje1.setBounds(0, 0, 100, 75); // Ajusta el tamaño del JLabel
 		personaje1.setIcon(new ImageIcon("C:\\\\Users\\\\plaiaundi\\\\eclipse-workspace\\\\RetoCaballeros\\\\recursos\\\\siegmeyer.png")); // Cambia la ruta de la imagen
 		contentPane.add(personaje1);
 	}
@@ -69,8 +68,12 @@ public class JFrameSeleccionDeCaballeros extends JFrame {
 		//conectarse a la BBDD y traerme los caballeros
 		
 		GestorBBDD gestorBBDD = new GestorBBDD();	
-		
+		int size = gestorBBDD.getCaballeros().size();
 		ArrayList<Caballero> caballeros = gestorBBDD.getCaballeros();
+
+		botonPane = new JPanel();
+		
+		botonPane.setLayout(new GridLayout(size, 2, 5, 0));
 		
 			for (Caballero caballero : caballeros) {
 				
@@ -80,13 +83,44 @@ public class JFrameSeleccionDeCaballeros extends JFrame {
 				btnNewButton.addActionListener(new ActionListener() {
 		        public void actionPerformed(ActionEvent e) {
 			        // Aquí puedes definir lo que quieras que haga el botón al ser clicado
-			        JOptionPane.showMessageDialog(JFrameSeleccionDeCaballeros.this, "Has elegido a " + caballero.getNombre());
-			        JButton btnNewButton = new JButton(caballero.getNombre());
+			        if (caballerosPelea.size()<2) {
+			        	caballerosPelea.add(caballero);
+			        	JOptionPane.showMessageDialog(JFrameSeleccionDeCaballeros.this, "Has elegido a " + caballero.getNombre());
+			        }
+			        else {
+			        	JOptionPane.showMessageDialog(JFrameSeleccionDeCaballeros.this, "Ya has elegido dos personajes");
+			        }
 		        }
 		        });
-				contentPane.add(btnNewButton);
-				contentPane.add(label);
+				botonPane.add(btnNewButton);
+				botonPane.add(label);
 			} 
+			JButton btnLucha = new JButton("LUCHAR");
+			btnLucha.addActionListener(new ActionListener() {
+		        public void actionPerformed(ActionEvent e) {
+			        // Aquí puedes definir lo que quieras que haga el botón al ser clicado
+			        if (caballerosPelea.size()<2) {
+			        	JOptionPane.showMessageDialog(JFrameSeleccionDeCaballeros.this, "Te falta por seleccionar algún personaje");
+			        }
+			        else {
+			        	pelear(caballerosPelea);
+			        	caballerosPelea.clear();
+			        }
+		        }
+		        });
+			
+		contentPane.add(botonPane);
+		contentPane.add(btnLucha);
+		
+	}
+
+	protected void pelear(ArrayList<Caballero> caballerosPelea) {
+		GestorBBDD gestorBBDD = new GestorBBDD();	
+		Lucha lucha = new Lucha(new Date(),caballerosPelea.get(0),caballerosPelea.get(1));
+		//Se llaman ganador y perdedor pero se decide en comienzo lucha quien será
+		lucha.comienzoLucha(); 
+		gestorBBDD.insertarLucha(lucha);
+		JOptionPane.showMessageDialog(JFrameSeleccionDeCaballeros.this, "El ganador es... ¡¡¡" +lucha.getGanador().getNombre()+"!!!");
 	}
 
 }

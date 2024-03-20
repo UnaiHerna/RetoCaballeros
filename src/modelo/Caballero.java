@@ -114,7 +114,6 @@ public class Caballero {
 	public double getFuerzaDeLucha() {
 		Random randomizador = new Random();
 		double numAleatorio = randomizador.nextDouble(1)/10;
-		System.out.println(numAleatorio);
 		return (getAtaque()-getDefensa())*(numAleatorio*exp);
 	}
 	
