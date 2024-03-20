@@ -56,7 +56,7 @@ public class ControladorCaballos {
 				Visor.visualizarCaballos(caballos);
 				
 				idCaballo = Formulario.introducirIdCaballo();
-				caballo = gestorBBDD.getCaballo(idCaballo);
+				caballo = Formulario.introducirDatosCaballo();
 				gestorBBDD.modificarCaballos(caballo, idCaballo);
 				
 				break;
