@@ -292,7 +292,7 @@ public class GestorBBDD extends Conector{
 				caballero.setNombre(rs.getString("nombre"));
 				caballero.setExp(rs.getInt("exp"));
 				caballero.setFuerza(rs.getInt("fuerza"));
-				caballero.setDestreza(rs.getInt("fuerza"));
+				caballero.setDestreza(rs.getInt("destreza"));
 				caballero.setArma(getArma(rs.getInt("id_arma")));
 				caballero.setEscudo(getEscudo(rs.getInt("id_escudo")));
 				caballero.setCaballo(getCaballoXIdCaballero(caballero.getId()));
